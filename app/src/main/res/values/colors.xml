@@ -17,4 +17,6 @@
     <color name="my_home_text_color">#2695EE</color>
     <color name="my_requests_text_color">#57A7B2</color>
     <color name="ksk_list_text_color">#8A8778</color>
+    <color name="ksk_image_color">#2196F3</color>
+
 </resources>
