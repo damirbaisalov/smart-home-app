@@ -40,15 +40,18 @@
             />
 
         <com.sanojpunchihewa.glowbutton.GlowButton
+            android:id="@+id/start_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="НАЧАТЬ"
             android:textColor="@color/white"
             app:glowColor="@color/white"
             app:buttonColor="@color/button_color"
+            app:unpressedGlowSize="8dp"
+            app:pressedGlowSize="13dp"
             android:gravity="center"
             android:paddingVertical="20dp"
-            android:background="@drawable/bg_ripple_effect"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingHorizontal="30dp"

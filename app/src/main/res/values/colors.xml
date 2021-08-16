@@ -12,4 +12,9 @@
     <color name="gradient_start_color">#01AEFB</color>
     <color name="gradient_center_color">#018EE8</color>
     <color name="button_color">#0C90FF</color>
+    <color name="news_text_color">#A86181</color>
+    <color name="my_ksk_text_color">#FB7E35</color>
+    <color name="my_home_text_color">#2695EE</color>
+    <color name="my_requests_text_color">#57A7B2</color>
+    <color name="ksk_list_text_color">#8A8778</color>
 </resources>
