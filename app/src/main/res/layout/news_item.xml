@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:background="@drawable/bg_news_image"
+        android:src="@drawable/news_image_pattern"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:paddingHorizontal="3dp"
+        android:paddingVertical="3dp"
+
+        />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingHorizontal="15dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/bg_news_linear_layout_texts"
+        android:layout_marginHorizontal="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="В Павлодаре до сих пор более 400 многоэтажек без горячей воды"
+            android:textSize="18sp"
+            android:lineSpacingExtra="5dp"
+            android:textStyle=""
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Подробнее"
+            android:drawableStart="@drawable/ic_news_down"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_down"
+        android:background="@drawable/bg_ripple_effect"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+</LinearLayout>
