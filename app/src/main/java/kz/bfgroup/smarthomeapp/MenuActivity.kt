@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.KskListActivity
 
 class MenuActivity : AppCompatActivity() {
@@ -11,8 +12,8 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val openKskListLayout = findViewById<LinearLayout>(R.id.open_ksk_list)
-        openKskListLayout.setOnClickListener {
+        val openKskListTextView = findViewById<TextView>(R.id.open_ksk_list)
+        openKskListTextView.setOnClickListener {
             val intent = Intent(this,KskListActivity::class.java)
             startActivity(intent)
         }
