@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeApp">
+        <activity android:name=".my_ksk.CandidatesActivity" />
         <activity android:name=".my_ksk.MyKskActivity" />
         <activity android:name=".news.presentation.NewsActivity" />
         <activity android:name=".ksk_list.presentation.KskListActivity" />

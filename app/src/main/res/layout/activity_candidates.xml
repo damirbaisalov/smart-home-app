@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".my_ksk.MyKskActivity">
+    tools:context=".my_ksk.CandidatesActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
+                android:paddingBottom="8dp"
                 android:background="@drawable/bg_my_ksk_linear_layout"
                 android:orientation="vertical">
 
@@ -51,7 +52,7 @@
                         android:src="@drawable/logo_pattern"/>
 
                     <TextView
-                        android:id="@+id/my_ksk_title"
+                        android:id="@+id/activity_candidates_my_ksk_title"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
@@ -83,183 +84,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
-                        android:text=""/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/darker_gray"/>
-
-                <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
-
-                    <TextView
-                        android:id="@+id/my_ksk_contacts"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:gravity="center_vertical"
-                        android:layout_marginHorizontal="15dp"
-                        android:text=""/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/darker_gray"/>
-
-                <LinearLayout
-                    android:layout_marginTop="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:paddingBottom="5dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
-
-                    <TextView
-                        android:id="@+id/my_ksk_predsedatel"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:layout_marginHorizontal="15dp"
-                        android:text=""/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/darker_gray"/>
-
-                <LinearLayout
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
-
-                    <TextView
-                        android:id="@+id/my_ksk_home_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:gravity="center_vertical"
-                        android:layout_marginHorizontal="15dp"
-                        android:text=""/>
+                        android:text="Численность сотрудников \n 12 человек"/>
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_my_ksk_linear_layout">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Режим работы КСК"
-                    android:gravity="center"
-                    android:paddingTop="25dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:paddingBottom="20dp"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="15dp"
-                        android:gravity="center_vertical"
-                        android:text="ПН-ПТ"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="15dp"
-                        android:gravity="center"
-                        android:text="09:00 - 18:00"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@android:color/darker_gray"/>
-
-                <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:gravity="center_vertical"
-                        android:layout_marginHorizontal="15dp"
-                        android:text="СБ-ВС"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="15dp"
-                        android:gravity="center"
-                        android:text="Выходной"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -284,6 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:paddingBottom="10dp"
                     android:orientation="horizontal">
 
 
@@ -368,31 +200,42 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
                             android:text="Не нравится"/>
-
                     </LinearLayout>
-
-
                 </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/open_vote_list_button"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_revote_button"
-                    android:text="ПЕРЕГОЛОСОВАТЬ"
-                    android:textColor="@color/button_color"
-                    android:padding="10dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    />
 
             </LinearLayout>
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_candidates_recyclerview"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/candidate_item"
+                tools:itemCount="2"
+                android:padding="20dp"
+                android:overScrollMode="never"
+                android:clipToPadding="false"
+                android:background="@drawable/bg_my_ksk_linear_layout"
+                android:layout_marginHorizontal="20dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_activity_candidates_button"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:text="ВЫДВИНУТЬСЯ НА ПОСТ ПРЕДСЕДАТЕЛЯ ОСИ"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_activity_candidates_button"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:text="ПРОГОЛОСВАТЬ ЗА ПРЕДСЕДАТЕЛЯ ОСИ"/>
 
         </LinearLayout>
 

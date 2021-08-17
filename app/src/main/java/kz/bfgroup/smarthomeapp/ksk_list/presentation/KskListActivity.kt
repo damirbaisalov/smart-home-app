@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskItemClickListener
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskListAdapter
@@ -75,7 +76,7 @@ class KskListActivity : AppCompatActivity() {
     }
 
     private fun loadApiData() {
-        ApiRetrofit.getApiClient().getKskList().enqueue(object: Callback<List<KskApiData>> {
+        ApiRetrofit2.getApiClient().getKskList().enqueue(object: Callback<List<KskApiData>> {
             override fun onResponse(
                 call: Call<List<KskApiData>>,
                 response: Response<List<KskApiData>>
