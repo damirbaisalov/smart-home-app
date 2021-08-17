@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_menu_activity_toolbar_gradient">
+
+
+    <ImageButton
+        android:id="@+id/activity_my_home_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:background="@drawable/bg_ripple_effect"
+        android:layout_marginStart="20dp"
+        android:padding="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Мой дом"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:background="@drawable/bg_ripple_effect"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.Toolbar>

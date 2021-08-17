@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".my_home.MyHomeActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_my_home_toolbar"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/bg_my_ksk_linear_layout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:id="@+id/activity_my_home_adress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Адрес: Ак. Чокина, 98"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:id="@+id/activity_my_home_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Статус: ОК"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <com.yandex.mapkit.mapview.MapView
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:padding="2dp"
+                    android:layout_height="220dp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="ИСТОРИЯ РЕМОНТНЫХ РАБОТ"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Данных еще не поступало"
+                    android:textColor="@color/button_color"
+                    android:gravity="top"
+                    android:layout_marginHorizontal="45dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="10dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/bg_my_ksk_linear_layout">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="информация о доме"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:layout_margin="20dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Год постройки"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_year_construction"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Общая площадь дома"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Количество этажей"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_floor_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Количество подъездов"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_flat_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Лифты"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_lifts"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Видеонаблюдение"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_video_spectating"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Кровля"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_krovlya"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Фасад"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_fasad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Балконы"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_balkon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/logo_pattern"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Задолженность дома"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_my_home_dolg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="1991 год"
+                        android:textColor="@color/black"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="5dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>
