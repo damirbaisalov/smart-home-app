@@ -14,13 +14,13 @@ class MenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        val openNewsTextView = findViewById<TextView>(R.id.open_news_activity)
+        val openNewsTextView = findViewById<LinearLayout>(R.id.open_news_activity)
         openNewsTextView.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
             startActivity(intent)
         }
 
-        val openKskListTextView = findViewById<TextView>(R.id.open_ksk_list)
+        val openKskListTextView = findViewById<LinearLayout>(R.id.open_ksk_list)
         openKskListTextView.setOnClickListener {
             val intent = Intent(this, KskListActivity::class.java)
             startActivity(intent)
