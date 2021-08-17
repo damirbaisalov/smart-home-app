@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kz.bfgroup.smarthomeapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeApp">
+        <activity android:name=".news.presentation.NewsActivity" />
         <activity android:name=".ksk_list.presentation.KskListActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
