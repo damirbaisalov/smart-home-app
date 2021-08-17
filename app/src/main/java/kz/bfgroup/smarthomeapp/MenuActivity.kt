@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.KskListActivity
+import kz.bfgroup.smarthomeapp.my_ksk.MyKskActivity
 import kz.bfgroup.smarthomeapp.news.presentation.NewsActivity
 import org.w3c.dom.Text
 
@@ -17,6 +18,12 @@ class MenuActivity : AppCompatActivity() {
         val openNewsTextView = findViewById<LinearLayout>(R.id.open_news_activity)
         openNewsTextView.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)
+        }
+
+        val openMyKskActivity = findViewById<LinearLayout>(R.id.open_my_ksk_activity)
+        openMyKskActivity.setOnClickListener {
+            val intent = Intent(this, MyKskActivity::class.java)
             startActivity(intent)
         }
 

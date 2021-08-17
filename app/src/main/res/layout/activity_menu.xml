@@ -64,6 +64,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/open_my_ksk_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
