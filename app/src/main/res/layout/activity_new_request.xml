@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".my_requests.NewRequestActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_my_request_toolbar"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Квартира"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    />
+                <TextView
+                    android:id="@+id/activity_new_request_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginHorizontal="30dp"
+                    android:text="Павлодар, Ак. Чокина 98"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginVertical="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Тема заявки"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="30dp"
+                    />
+
+                <EditText
+                    android:id="@+id/activity_new_request_heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginHorizontal="30dp"
+                    android:textSize="14sp"
+                    android:hint="Введите тему для заявки"
+                    android:focusedByDefault="false"
+                    android:backgroundTint="@color/gradient_start_color"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginVertical="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Описание проблемы"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginHorizontal="30dp"
+                    />
+
+                <EditText
+                    android:id="@+id/activity_new_request_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginHorizontal="30dp"
+                    android:hint="Введите описание"
+                    android:focusedByDefault="false"
+                    android:backgroundTint="@color/gradient_start_color"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginVertical="10dp"
+                    />
+
+                <Button
+                    android:id="@+id/activity_new_request_send_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/bg_new_request_activity_send_button"
+                    android:text="Отправить"
+                    android:paddingHorizontal="25dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textColor="@color/gradient_start_color"
+                    android:textAllCaps="false"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="20dp"
+                    />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>
