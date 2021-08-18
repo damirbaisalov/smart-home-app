@@ -2,24 +2,30 @@ package kz.bfgroup.smarthomeapp.my_home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.mapkit.search.*
+import com.yandex.runtime.Error
+import com.yandex.runtime.network.NetworkError
+import com.yandex.runtime.network.RemoteError
+import com.yandex.runtime.ui_view.ViewProvider
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomePassportApiData
-import kz.bfgroup.smarthomeapp.my_ksk.models.MyKskApiData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyHomeActivity : AppCompatActivity() {
+class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListener {
 
     private lateinit var myHomeTitle: TextView
     private lateinit var myHomeStatus: TextView
@@ -37,6 +43,9 @@ class MyHomeActivity : AppCompatActivity() {
     private lateinit var myHomeDolg: TextView
 
     private lateinit var mapView: MapView
+    private lateinit var searchSession: Session
+    private lateinit var searchManager: SearchManager
+    private lateinit var homeAddressText : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.initialize(this)
@@ -76,8 +85,11 @@ class MyHomeActivity : AppCompatActivity() {
         myHomeBalkon = findViewById(R.id.activity_my_home_balkon)
         myHomeDolg = findViewById(R.id.activity_my_home_dolg)
 
+        searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
         mapView = findViewById(R.id.map_view)
+        mapView.map.addCameraListener(this)
         mapView.map.isScrollGesturesEnabled = false
+        mapView.map.isZoomGesturesEnabled = false
     }
 
     private fun loadApiData() {
@@ -90,6 +102,11 @@ class MyHomeActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
 
                     val responseBody = response.body()!!
+                    val addressGeoCode = responseBody.street + ", " + responseBody.nomer
+
+                    homeAddressText = addressGeoCode
+
+                    submitQuery(homeAddressText)
 
                     myHomeTitle.text = ("Адрес: " + responseBody.street + ", " + responseBody.nomer)
                     myHomeStatus.text = ("Статус: " + responseBody.status)
@@ -136,6 +153,14 @@ class MyHomeActivity : AppCompatActivity() {
         })
     }
 
+    private fun submitQuery(query: String) {
+        searchSession = searchManager.submit(
+            query,
+            VisibleRegionUtils.toPolygon(mapView.map.visibleRegion),
+            SearchOptions(),
+            this
+        )
+    }
 
     override fun onStop() {
         super.onStop()
@@ -147,5 +172,56 @@ class MyHomeActivity : AppCompatActivity() {
         super.onStart()
         mapView.onStart()
         MapKitFactory.getInstance().onStart()
+    }
+
+    private fun drawHomeMarker(p: Point) : ViewProvider {
+        val view = View(applicationContext).apply {
+            background = applicationContext.getDrawable(R.drawable.ic_home_location)
+        }
+
+        return ViewProvider(view)
+    }
+
+    override fun onSearchResponse(p0: com.yandex.mapkit.search.Response) {
+        val mapObjects = mapView.map.mapObjects
+        mapObjects.clear()
+
+        for (searchResult in p0.collection.children) {
+            val resultLocation = searchResult.obj!!.geometry[0].point
+            if (resultLocation != null) {
+                mapObjects.addPlacemark(
+                    resultLocation,
+                    drawHomeMarker(resultLocation)
+                )
+
+                mapView.map.move(
+                    CameraPosition(resultLocation,16f,0.0f,0.0f),
+                    Animation(Animation.Type.SMOOTH, 1F),
+                    null
+                )
+            }
+        }
+    }
+
+    override fun onSearchError(p0: Error) {
+        var errorMessage = "Unknown error"
+        if (p0 is RemoteError){
+            errorMessage = "Remote error"
+        } else if (p0 is NetworkError) {
+            errorMessage = "Network error"
+        }
+
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onCameraPositionChanged(
+        p0: Map,
+        p1: CameraPosition,
+        p2: CameraUpdateReason,
+        p3: Boolean
+    ) {
+//       if (p3) {
+//           submitQuery("Камзина, 167")
+//       }
     }
 }
