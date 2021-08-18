@@ -62,4 +62,9 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // Полная библиотека в дополнение к lite версии предоставляет автомобильную маршрутизацию,
+    // веломаршрутизацию, пешеходную маршрутизацию и маршрутизацию на общественном транспорте,
+    // поиск, suggest, геокодирование и отображение панорам.
+    implementation 'com.yandex.android:maps.mobile:4.0.0-full'
 }
