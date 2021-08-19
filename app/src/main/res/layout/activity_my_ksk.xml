@@ -307,14 +307,14 @@
                                 android:background="@drawable/circle_shape"
                                 style="?android:attr/progressBarStyleHorizontal"
                                 android:max="100"
-                                android:progress="54"/>
+                                android:progress="0"/>
 
                             <TextView
                                 android:id="@+id/progress_bar1_text_inside"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:text="54%"
+                                android:text="%"
                                 android:gravity="center"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"/>
@@ -349,14 +349,14 @@
                                 android:background="@drawable/circle_shape"
                                 style="?android:attr/progressBarStyleHorizontal"
                                 android:max="100"
-                                android:progress="46"/>
+                                android:progress="0"/>
 
                             <TextView
                                 android:id="@+id/progress_bar2_text_inside"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:text="46%"
+                                android:text="%"
                                 android:gravity="center"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"/>

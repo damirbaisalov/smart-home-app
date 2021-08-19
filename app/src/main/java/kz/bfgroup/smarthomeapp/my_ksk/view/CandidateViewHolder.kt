@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
-import org.w3c.dom.Text
 
 class CandidateViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -14,15 +13,12 @@ class CandidateViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val candidateVoteProgress: ProgressBar = itemView.findViewById(R.id.candidate_vote_progress)
     private val candidateVoteNum: TextView = itemView.findViewById(R.id.candidate_vote_num)
 
-    init {
-        candidateVoteProgress.max = 13
-    }
     fun onBind(candidatesApiData: CandidatesApiData) {
 
         candidateName.text = candidatesApiData.fio
         candidateVoteNum.text = (candidatesApiData.golosa + " голосов")
 
+        candidateVoteProgress.max = candidatesApiData.max_golos?.toInt()!!
         candidateVoteProgress.progress = candidatesApiData.golosa?.toInt()!!
-
     }
 }
