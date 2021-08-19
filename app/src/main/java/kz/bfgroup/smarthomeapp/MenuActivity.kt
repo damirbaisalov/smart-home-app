@@ -8,6 +8,7 @@ import android.widget.TextView
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.KskListActivity
 import kz.bfgroup.smarthomeapp.my_home.MyHomeActivity
 import kz.bfgroup.smarthomeapp.my_ksk.MyKskActivity
+import kz.bfgroup.smarthomeapp.my_requests.MyRequestsActivity
 import kz.bfgroup.smarthomeapp.news.presentation.NewsActivity
 import org.w3c.dom.Text
 
@@ -31,6 +32,12 @@ class MenuActivity : AppCompatActivity() {
         val openMyHomeActivity = findViewById<LinearLayout>(R.id.open_my_home_activity)
         openMyHomeActivity.setOnClickListener {
             val intent = Intent(this, MyHomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        val openMyRequestActivity = findViewById<LinearLayout>(R.id.open_my_request_activity)
+        openMyRequestActivity.setOnClickListener {
+            val intent = Intent(this, MyRequestsActivity::class.java)
             startActivity(intent)
         }
 

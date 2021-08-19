@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".my_requests.MyRequestsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_my_request_toolbar"
+            android:layout_gravity="top"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_my_request_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/my_request_item"
+            android:clipToPadding="false"
+            android:paddingTop="20dp"
+            android:paddingBottom="70dp"
+            />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/activity_my_request_new_request"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_activity_my_request_add_request_button"
+        android:src="@drawable/ic_add_request_withou_background"
+        android:elevation="6dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="30dp"/>
+
+</FrameLayout>

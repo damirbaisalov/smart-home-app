@@ -5,13 +5,11 @@ import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomePassportApiData
 import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
 import kz.bfgroup.smarthomeapp.my_ksk.models.MyKskApiData
+import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.net.ResponseCache
 
 interface ApiClient {
@@ -46,4 +44,12 @@ interface ApiClient {
     @FormUrlEncoded
     @POST("post.php")
     fun getMyHomePassport(@Field("teh_passport_home_id") homeId: String) : Call<HomePassportApiData>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun getMyRequests(@FieldMap fields: Map<String, String>): Call<List<MyRequestApiData>>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun sendNewRequest(@FieldMap fields: Map<String, String>): Call<ResponseBody>
 }

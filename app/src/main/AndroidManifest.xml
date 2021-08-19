@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeApp">
+        <activity android:name=".my_requests.NewRequestActivity" />
+        <activity android:name=".my_requests.MyRequestsActivity" />
         <activity android:name=".my_home.MyHomeActivity" />
         <activity android:name=".my_ksk.CandidatesActivity" />
         <activity android:name=".my_ksk.MyKskActivity" />
