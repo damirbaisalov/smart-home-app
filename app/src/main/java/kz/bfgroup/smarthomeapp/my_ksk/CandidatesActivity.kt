@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
+import kz.bfgroup.smarthomeapp.my_ksk.models.MyKskApiData
 import kz.bfgroup.smarthomeapp.my_ksk.view.CandidateAdapter
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsAdapter
@@ -23,7 +24,11 @@ class CandidatesActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var backButton: ImageButton
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar1: ProgressBar
+    private lateinit var progressBar2: ProgressBar
+    private lateinit var progressBar1TextView: TextView
+    private lateinit var progressBar2TextView: TextView
+
     private lateinit var kskTitle: TextView
     private val candidatesAdapter = CandidateAdapter()
 
@@ -37,6 +42,7 @@ class CandidatesActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        loadMyKskData()
         loadApiData()
     }
 
@@ -53,6 +59,10 @@ class CandidatesActivity : AppCompatActivity() {
         backButton = findViewById(R.id.activity_my_ksk_back_button)
 //        progressBar = findViewById(R.id.activity_news_list_progress_bar)
 //        recyclerView.visibility = View.INVISIBLE
+        progressBar1 = findViewById(R.id.candidates_activity_progressBar1)
+        progressBar2 = findViewById(R.id.candidates_activity_progressBar2)
+        progressBar1TextView = findViewById(R.id.candidates_activity_progress_bar1_text_inside)
+        progressBar2TextView = findViewById(R.id.candidates_activity_progress_bar2_text_inside)
     }
 
     private fun loadApiData() {
@@ -73,6 +83,36 @@ class CandidatesActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<CandidatesApiData>>, t: Throwable) {
+//                progressBar.visibility = View.GONE
+                Toast.makeText(this@CandidatesActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
+    private fun loadMyKskData() {
+        ApiRetrofit.getApiClient().getMyKsk("121").enqueue(object: Callback<MyKskApiData> {
+            override fun onResponse(
+                call: Call<MyKskApiData>,
+                response: Response<MyKskApiData>
+            ) {
+//                progressBar.visibility = View.GONE
+                if (response.isSuccessful) {
+
+                    val responseBody = response.body()!!
+
+                    val kskRatingLiked = responseBody.reiting?.toDouble()?.div(0.05)
+                    val kskRatingNotLiked = 100 - kskRatingLiked!!
+                    progressBar1.progress = kskRatingLiked.toInt()
+                    progressBar2.progress = kskRatingNotLiked.toInt()
+
+                    progressBar1TextView.text = ("${progressBar1.progress}%")
+                    progressBar2TextView.text = ("${progressBar2.progress}%")
+
+                }
+            }
+
+            override fun onFailure(call: Call<MyKskApiData>, t: Throwable) {
 //                progressBar.visibility = View.GONE
                 Toast.makeText(this@CandidatesActivity, t.message, Toast.LENGTH_LONG).show()
             }

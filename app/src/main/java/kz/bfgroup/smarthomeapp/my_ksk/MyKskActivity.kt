@@ -59,7 +59,9 @@ class MyKskActivity : AppCompatActivity() {
         myKskHomeCount = findViewById(R.id.my_ksk_home_count)
         backButton = findViewById(R.id.activity_my_ksk_back_button)
         progressBar1 = findViewById(R.id.progressBar1)
+        progressBar1.max = 100
         progressBar2 = findViewById(R.id.progressBar2)
+        progressBar2.max = 100
         progressBar1TextView = findViewById(R.id.progress_bar1_text_inside)
         progressBar2TextView = findViewById(R.id.progress_bar2_text_inside)
         openVoteListButton = findViewById(R.id.open_vote_list_button)
@@ -82,6 +84,15 @@ class MyKskActivity : AppCompatActivity() {
                     myKskEmployeeNum.text = ("Численность сотдруников"+"\n"+"12")
                     myKskPhones.text = ("Контакты:" + "\n" + "тел."+responseBody.phones)
                     myKskDirectorName.text = ("Председатель:"+"\n"+responseBody.director_full_name)
+
+
+                    val kskRatingLiked = responseBody.reiting?.toDouble()?.div(0.05)
+                    val kskRatingNotLiked = 100 - kskRatingLiked!!
+                    progressBar1.progress = kskRatingLiked.toInt()
+                    progressBar2.progress = kskRatingNotLiked.toInt()
+
+                    progressBar1TextView.text = ("${progressBar1.progress}%")
+                    progressBar2TextView.text = ("${progressBar2.progress}%")
 
                 }
             }
