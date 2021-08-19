@@ -1,11 +1,13 @@
 package kz.bfgroup.smarthomeapp.my_requests
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
@@ -20,6 +22,7 @@ class NewRequestActivity : AppCompatActivity() {
     private lateinit var newRequestText: EditText
     private lateinit var sendNewRequestButton: TextView
     private lateinit var backButton: ImageButton
+//    private val builder = AlertDialog.Builder(this)
     private lateinit var fields: Map<String, String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +36,16 @@ class NewRequestActivity : AppCompatActivity() {
         }
 
         sendNewRequestButton.setOnClickListener {
-            if (newRequestHeading.text.toString().trim().isEmpty() || newRequestText.text.toString().trim().isEmpty()) {
+
+            val requestTitleTrim = newRequestHeading.text.toString().trim()
+            val requestMessageTrim = newRequestText.text.toString().trim()
+
+            if (requestTitleTrim.isEmpty() || requestMessageTrim.isEmpty()) {
                 Toast.makeText(this@NewRequestActivity, "Заполните необходимые поля", Toast.LENGTH_LONG).show()
             } else {
                 fields = mutableMapOf(
-                    "heading" to newRequestHeading.text.toString(),
-                    "message_text" to newRequestText.text.toString(),
+                    "heading" to requestTitleTrim,
+                    "message_text" to requestMessageTrim,
                     "apply_home_id" to "1020",
                     "apply_ksk_id" to "121",
                     "apply_tenants_id" to "59"
@@ -68,8 +75,12 @@ class NewRequestActivity : AppCompatActivity() {
                     if (response.body()?.string()=="Введите все поля!"){
                         Toast.makeText(this@NewRequestActivity, response.body()?.string(), Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this@NewRequestActivity, response.body()?.string(), Toast.LENGTH_LONG).show()
-                        finish()
+                        val dialogFragment = SuccessNewRequestDialogFragment()
+                        val fragmentManager = supportFragmentManager
+
+                        val transaction = fragmentManager.beginTransaction()
+                        dialogFragment.show(transaction, "dialog")
+
                     }
                 }
             }
