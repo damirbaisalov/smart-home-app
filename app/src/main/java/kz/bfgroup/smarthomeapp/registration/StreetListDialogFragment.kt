@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -34,6 +35,7 @@ class StreetListDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         rootView = inflater.inflate(R.layout.street_list_dialog_fragment,container,false)
 
         bindViews()
