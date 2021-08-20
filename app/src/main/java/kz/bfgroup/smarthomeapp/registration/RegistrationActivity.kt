@@ -6,10 +6,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import kz.bfgroup.smarthomeapp.R
+import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInputNewListener {
 
     private lateinit var userFIOEditText: EditText
     private lateinit var userIINEditText: EditText
@@ -22,6 +28,12 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var userPasswordEditText: EditText
     private lateinit var registerButton: Button
     private lateinit var fields: Map<String, String>
+    private val bundle = Bundle()
+    private var okRequest = false
+    private lateinit var userPhoneFormatted: String
+    private lateinit var userNameSurnameFormatted: String
+    private lateinit var userDadNameFormatted: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,8 +68,28 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener {
+            userPhoneFormatted = userTelephoneEditText.text.toString()
+            userPhoneFormatted = userPhoneFormatted.substring(1,userPhoneFormatted.length)
+
+            val list = userFIOEditText.text.toString().split(" ")
+            userNameSurnameFormatted = list[0] + " " + list[1]
+            userDadNameFormatted = list[2]
+
+            bundle.putString("user_fullname", userNameSurnameFormatted)
+            bundle.putString("user_dadname", userDadNameFormatted)
+            bundle.putString("user_iin", userIINEditText.text.toString())
+            bundle.putString("user_email", userEmailEditText.text.toString())
+            bundle.putString("user_birthday", userBirthdayEditText.text.toString())
+            bundle.putString("user_apartment", userApartmentEditText.text.toString())
+            bundle.putString("user_entrance", userEntranceEditText.text.toString())
+            bundle.putString("user_telephone", userPhoneFormatted)
+            bundle.putString("user_password", userPasswordEditText.text.toString())
+
+            sendSmsCode()
             val dialog = CodeDialogFragment()
+            dialog.arguments = bundle
             dialog.show(supportFragmentManager, "codeDialog")
+
         }
     }
 
@@ -74,4 +106,32 @@ class RegistrationActivity : AppCompatActivity() {
         registerButton = findViewById(R.id.submit_user_data_button)
     }
 
+    private fun sendSmsCode() {
+        ApiRetrofit.getApiClient().sendSMSCode(userPhoneFormatted).enqueue(object: Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    showToast(response.body()!!.string())
+//                    okRequest = response.body()!!.string() == "Ok"
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                okRequest = false
+            }
+        })
+    }
+
+    override fun inputAddress(street: String?, number: String?) {
+        if (street==null && number==null) {
+            userAddressEditText.setText("")
+        } else {
+            userAddressEditText.setText(("$street, $number"))
+            bundle.putString("user_street", street)
+            bundle.putString("user_street_nomer", number)
+        }
+    }
+
+    private fun showToast(text: String?) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
 }

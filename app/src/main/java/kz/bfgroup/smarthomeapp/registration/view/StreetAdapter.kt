@@ -6,14 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 
-class StreetAdapter: RecyclerView.Adapter<StreetViewHolder>() {
+class StreetAdapter(
+    private val streetClickListener: StreetClickListener
+): RecyclerView.Adapter<StreetViewHolder>() {
 
     private var dataList: MutableList<StreetApiData> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StreetViewHolder {
         val rootView = LayoutInflater.from(parent.context).inflate(R.layout.street_item, parent, false)
 
-        return StreetViewHolder(rootView)
+        return StreetViewHolder(
+            rootView,
+            streetClickListener
+        )
     }
 
     override fun onBindViewHolder(holder: StreetViewHolder, position: Int) {

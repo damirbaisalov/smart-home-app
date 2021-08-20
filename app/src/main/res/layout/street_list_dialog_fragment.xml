@@ -39,26 +39,11 @@
                     android:id="@+id/street_list_dialog_fragment_progressbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center"
+                    android:layout_gravity="center"
                     android:paddingHorizontal="170dp"
                     android:paddingVertical="50dp"
                     />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/street_list_dialog_fragment_submit_address_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Выбрать адрес"
-            android:textColor="@color/white"
-            android:layout_gravity="bottom|center"
-            android:layout_marginHorizontal="50dp"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:background="@drawable/bg_activity_registration_submit_button"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            />
 
 </FrameLayout>

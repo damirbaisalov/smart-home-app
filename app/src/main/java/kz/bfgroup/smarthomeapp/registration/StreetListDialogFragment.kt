@@ -1,6 +1,8 @@
 package kz.bfgroup.smarthomeapp.registration
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,22 +14,28 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
-import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
-import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 import kz.bfgroup.smarthomeapp.registration.view.StreetAdapter
+import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.ClassCastException
 
 class StreetListDialogFragment: DialogFragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
-    private var streetAdapter = StreetAdapter()
+    private var streetAdapter = StreetAdapter(getStreetClickListener())
     private lateinit var searchView: SearchView
     private lateinit var progressBar: ProgressBar
+
+    interface OnInputNewListener {
+        fun inputAddress(street : String?, number: String?)
+    }
+
+    private lateinit var onInputNewListener: OnInputNewListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,4 +90,21 @@ class StreetListDialogFragment: DialogFragment() {
         })
     }
 
+    private fun getStreetClickListener(): StreetClickListener {
+        return object: StreetClickListener {
+            override fun onClick(street: String?, nomer: String?) {
+                onInputNewListener.inputAddress(street, nomer)
+                dismiss()
+            }
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            onInputNewListener = activity as OnInputNewListener
+        } catch (e: ClassCastException){
+            Log.d("TAG", "onAttach: ClassException: " + e.message)
+        }
+    }
 }
