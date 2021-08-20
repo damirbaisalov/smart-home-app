@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SmartHomeApp</string>
+
+    <string name="required_field">Необходимо заполнить</string>
+    <string name="min_password_length">мин. длина пароля 6 символов</string>
+    <string name="email_format_wrong">неверный формат email @</string>
 </resources>

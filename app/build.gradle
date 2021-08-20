@@ -70,4 +70,7 @@ dependencies {
 
     //input-mask-edit-text
     implementation 'ru.egslava:MaskedEditText:1.0.5'
+
+    //form-validation
+    implementation 'com.basgeekball:awesome-validation:4.2'
 }
