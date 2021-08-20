@@ -195,7 +195,6 @@
                 android:background="@drawable/bg_activity_registration_submit_button"
                 />
 
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

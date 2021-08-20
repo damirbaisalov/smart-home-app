@@ -21,6 +21,10 @@ interface ApiClient {
 
     @FormUrlEncoded
     @POST("post.php")
+    fun userLogin(@FieldMap fields: Map<String, String>) : Call<UserApiData>
+
+    @FormUrlEncoded
+    @POST("post.php")
     fun getNewsList(@Field("pvl_news_startFrom") startIndex: String) : Call<List<NewsApiData>>
 
     @FormUrlEncoded

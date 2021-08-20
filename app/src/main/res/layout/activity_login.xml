@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.LoginActivity">
+
+    <include layout="@layout/activity_menu_toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/login_form_linear_layout"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+
+
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/login_activity_user_telephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:paddingHorizontal="15dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="5dp"
+            android:drawablePadding="5dp"
+            android:drawableEnd="@drawable/ic_phone_number"
+            android:inputType="phone"
+            android:backgroundTint="@color/gradient_start_color"
+            android:typeface="normal"
+            android:maxLines="1"
+            mask:allowed_chars="1234567890"
+            mask:mask="+7(###)###-##-##"
+            android:hint="**********"
+            />
+
+        <EditText
+            android:id="@+id/login_activity_user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp"
+            android:textColor="@color/black"
+            android:typeface="normal"
+            android:layout_marginHorizontal="30dp"
+            android:focusedByDefault="false"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:hint="Пароль"
+            android:drawableEnd="@drawable/ic_lock"
+            android:drawablePadding="5dp"
+            android:inputType="textPassword"
+            android:backgroundTint="@color/gradient_start_color"
+            />
+
+        <Button
+            android:id="@+id/login_activity_submit_user_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="Войти"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:elevation="2dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="30dp"
+            android:paddingHorizontal="70dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_activity_registration_submit_button"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/open_registration_form"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@drawable/bg_activity_login_no_account_button">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Не зарегистрированы?"
+                android:textAllCaps="false"
+                android:textColor="@color/button_color"
+                android:layout_gravity="bottom"
+
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/button_color"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/login_form_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        />
+
+
+</FrameLayout>
