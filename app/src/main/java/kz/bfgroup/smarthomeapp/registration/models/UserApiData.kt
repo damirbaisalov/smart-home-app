@@ -33,5 +33,7 @@ data class UserApiData(
     @JsonProperty("tel")
     val tel: String?,
     @JsonProperty("mess")
-    val mess: String?
+    val mess: String?,
+    @JsonProperty("mess_status")
+    val mess_status: String?
 )
