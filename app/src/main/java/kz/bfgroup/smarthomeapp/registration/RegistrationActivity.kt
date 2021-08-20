@@ -79,9 +79,9 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
         }
 
         registerButton.setOnClickListener {
-
+            showToast(formatTelephoneNumber(userTelephoneEditText.text.toString()).trim())
             if (validation.validate() &&
-                formatTelephoneNumber(userTelephoneEditText.text.toString()).isNotEmpty()
+                formatTelephoneNumber(userTelephoneEditText.text.toString()).trim().isNotEmpty()
                 && userAddressEditText.text.toString().isNotEmpty()) {
 
                 val list = userFIOEditText.text.toString().split(" ")
@@ -118,7 +118,7 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
 
             } else if (validation.validate() && userAddressEditText.text.toString().isEmpty()) {
                 showToast("Выберите адрес из списка")
-            } else if (validation.validate() && formatTelephoneNumber(userTelephoneEditText.text.toString()).isEmpty()) {
+            } else if (validation.validate() && formatTelephoneNumber(userTelephoneEditText.text.toString()).trim().isEmpty()) {
                 showToast("Введите номер")
             } else {
                 showToast("Заполните все поля")
@@ -196,13 +196,6 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
         validation.addValidation(
             this,
             R.id.user_entrance,
-            RegexTemplate.NOT_EMPTY,
-            R.string.required_field
-        )
-
-        validation.addValidation(
-            this,
-            R.id.user_telephone,
             RegexTemplate.NOT_EMPTY,
             R.string.required_field
         )

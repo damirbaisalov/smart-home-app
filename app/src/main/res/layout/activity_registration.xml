@@ -46,6 +46,7 @@
                 android:textColor="@color/black"
                 android:layout_marginHorizontal="30dp"
                 android:paddingHorizontal="15dp"
+                android:maxLength="12"
                 android:focusedByDefault="false"
                 android:hint="ИИН"
                 android:singleLine="true"
@@ -140,6 +141,7 @@
                 android:drawablePadding="5dp"
                 android:drawableEnd="@drawable/ic_apartment"
                 android:singleLine="true"
+                android:inputType="numberDecimal"
                 android:hint="Подъезд"
                 android:backgroundTint="@color/gradient_start_color"
                 />
@@ -158,7 +160,6 @@
                 android:backgroundTint="@color/gradient_start_color"
                 android:typeface="normal"
                 android:maxLines="1"
-                android:singleLine="true"
                 mask:allowed_chars="1234567890"
                 mask:mask="+7(###)###-##-##"
                 android:hint="**********"
