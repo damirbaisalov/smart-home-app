@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_menu_activity_toolbar_gradient">
 
-
     <ImageButton
         android:id="@+id/activity_ksk_list_back_button"
         android:layout_width="wrap_content"
@@ -15,6 +14,7 @@
         android:padding="4dp"/>
 
     <TextView
+        android:id="@+id/activity_ksk_list_toolbar_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Список КСК"
@@ -23,20 +23,16 @@
         android:textStyle="bold"
         />
 
-    <LinearLayout
+    <SearchView
+        android:id="@+id/activity_ksk_list_toolbar_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:background="@drawable/bg_ripple_effect"
-            android:layout_marginEnd="15dp"
-            android:padding="10dp"
-            />
-
-    </LinearLayout>
+        android:layoutDirection="rtl"
+        android:iconifiedByDefault="true"
+        android:closeIcon="@drawable/ic_close"
+        android:searchIcon="@drawable/ic_search"
+        android:queryBackground="@null"
+        android:queryHint="Поиск КСК"
+        />
 
 </androidx.appcompat.widget.Toolbar>

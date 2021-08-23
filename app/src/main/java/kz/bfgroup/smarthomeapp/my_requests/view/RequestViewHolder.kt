@@ -13,10 +13,13 @@ class RequestViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val myRequestTextTextView: TextView = itemView.findViewById(R.id.my_request_text)
     private val myRequestStatusTextView: TextView = itemView.findViewById(R.id.my_request_status_text)
     private val myRequestDateTextView: TextView = itemView.findViewById(R.id.my_request_date)
+    private val myRequestAddress: TextView = itemView.findViewById(R.id.my_request_address)
+
 
     fun onBind(myRequestApiData: MyRequestApiData) {
 
         myRequestNumberIdTextView.text = ("№"+myRequestApiData.id)
+        myRequestAddress.text = myRequestApiData.address
         myRequestHeadingTextView.text = myRequestApiData.heading
         myRequestTextTextView.text = myRequestApiData.text
         if (myRequestApiData.status=="4"){

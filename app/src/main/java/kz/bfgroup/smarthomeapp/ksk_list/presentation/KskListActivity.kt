@@ -3,10 +3,7 @@ package kz.bfgroup.smarthomeapp.ksk_list.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
@@ -15,6 +12,7 @@ import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskItemClickListener
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskListAdapter
+import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,17 +28,31 @@ class KskListActivity : AppCompatActivity() {
     private var count = 0
     private val kskListAdapter = KskListAdapter(getKskItemClickListener())
 
+    private lateinit var toolbarTitleTextView: TextView
+    private var searchingKskList: List<KskApiData> = listOf()
+    private lateinit var searchView: SearchView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ksk_list)
 
         initViews()
 
+        searchView.setOnSearchClickListener {
+            toolbarTitleTextView.visibility = View.GONE
+        }
+        searchView.setOnCloseListener {
+            toolbarTitleTextView.visibility = View.VISIBLE
+            false
+        }
+
         backButton.setOnClickListener {
             onBackPressed()
         }
 
         loadApiData()
+
+        queryInSearchView()
 
         scrollDownButton.setOnClickListener {
             recyclerView.smoothScrollToPosition(count-1)
@@ -73,6 +85,9 @@ class KskListActivity : AppCompatActivity() {
         recyclerView.visibility = View.INVISIBLE
         scrollDownButton = findViewById(R.id.scroll_down_recyclerview)
         scrollUpButton = findViewById(R.id.scroll_up_recyclerview)
+
+        toolbarTitleTextView = findViewById(R.id.activity_ksk_list_toolbar_text_view)
+        searchView = findViewById(R.id.activity_ksk_list_toolbar_search_view)
     }
 
     private fun loadApiData() {
@@ -88,6 +103,7 @@ class KskListActivity : AppCompatActivity() {
                     val kskApiDataResponseList: MutableList<KskApiData> = mutableListOf()
                     val list = response.body()!!
                     kskApiDataResponseList.addAll(list)
+                    searchingKskList = list
                     kskListAdapter.setList(kskApiDataResponseList)
                     count = list.size
                 }
@@ -98,6 +114,34 @@ class KskListActivity : AppCompatActivity() {
                 Toast.makeText(this@KskListActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
+        })
+    }
+
+    private fun queryInSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                searchView.clearFocus()
+                val queryText = p0?.lowercase()
+
+                kskListAdapter.filter(queryText!!)
+
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+
+                val queryText = p0?.lowercase()
+
+                val newRequestList : MutableList<KskApiData> = mutableListOf()
+                for (q in searchingKskList) {
+                    if (q.kskName?.contains(queryText!!)!!) {
+                        newRequestList.add(q)
+                    }
+                }
+                kskListAdapter.setList(newRequestList)
+
+                return false
+            }
         })
     }
 

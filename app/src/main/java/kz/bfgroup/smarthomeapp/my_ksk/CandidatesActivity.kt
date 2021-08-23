@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
@@ -37,6 +38,9 @@ class CandidatesActivity : AppCompatActivity() {
 
     private lateinit var kskTitle: TextView
     private val candidatesAdapter = CandidateAdapter()
+
+    private lateinit var progressBar: ProgressBar
+    private lateinit var nestedScrollView: NestedScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +73,9 @@ class CandidatesActivity : AppCompatActivity() {
         progressBar2 = findViewById(R.id.candidates_activity_progressBar2)
         progressBar1TextView = findViewById(R.id.candidates_activity_progress_bar1_text_inside)
         progressBar2TextView = findViewById(R.id.candidates_activity_progress_bar2_text_inside)
+        progressBar = findViewById(R.id.activity_candidates_progress_bar)
+        nestedScrollView = findViewById(R.id.activity_candidates_nested_scroll)
+        nestedScrollView.visibility = View.INVISIBLE
     }
 
     private fun loadApiData() {
@@ -102,7 +109,8 @@ class CandidatesActivity : AppCompatActivity() {
                 call: Call<MyKskApiData>,
                 response: Response<MyKskApiData>
             ) {
-//                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE
+                nestedScrollView.visibility = View.VISIBLE
                 if (response.isSuccessful) {
 
                     val responseBody = response.body()!!
@@ -119,7 +127,7 @@ class CandidatesActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<MyKskApiData>, t: Throwable) {
-//                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE
                 Toast.makeText(this@CandidatesActivity, t.message, Toast.LENGTH_LONG).show()
             }
 

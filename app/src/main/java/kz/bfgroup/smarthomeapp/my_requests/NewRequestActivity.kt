@@ -5,13 +5,12 @@ import android.content.DialogInterface
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
 import kz.bfgroup.smarthomeapp.registration.GENERATED_KSK_ID
@@ -28,8 +27,10 @@ class NewRequestActivity : AppCompatActivity() {
     private lateinit var newRequestText: EditText
     private lateinit var sendNewRequestButton: TextView
     private lateinit var backButton: ImageButton
+    private lateinit var newRequestAddress: TextView
 //    private val builder = AlertDialog.Builder(this)
     private lateinit var fields: Map<String, String>
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,8 @@ class NewRequestActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             onBackPressed()
         }
+
+        loadApiData()
 
         sendNewRequestButton.setOnClickListener {
 
@@ -66,6 +69,9 @@ class NewRequestActivity : AppCompatActivity() {
         newRequestText = findViewById(R.id.activity_new_request_text)
         sendNewRequestButton = findViewById(R.id.activity_new_request_send_button)
         backButton = findViewById(R.id.activity_my_request_back_button)
+        newRequestAddress = findViewById(R.id.activity_new_request_address)
+        searchView = findViewById(R.id.activity_my_request_toolbar_search_view)
+        searchView.visibility = View.GONE
     }
 
     private fun sendRequest() {
@@ -93,6 +99,26 @@ class NewRequestActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 //                progressBar.visibility = View.GONE
+                Toast.makeText(this@NewRequestActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
+
+    private fun loadApiData() {
+        ApiRetrofit.getApiClient().getMyHomeAddress(getSavedHomeId()).enqueue(object: Callback<HomeApiData> {
+            override fun onResponse(
+                call: Call<HomeApiData>,
+                response: Response<HomeApiData>
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()!!
+                    newRequestAddress.text = (responseBody.street + ", " + responseBody.nomer)
+                }
+            }
+
+            override fun onFailure(call: Call<HomeApiData>, t: Throwable) {
                 Toast.makeText(this@NewRequestActivity, t.message, Toast.LENGTH_LONG).show()
             }
 

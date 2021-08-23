@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskViewHolder
+import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 
 class NewsAdapter(
@@ -34,6 +35,21 @@ class NewsAdapter(
 
     fun clearAll() {
         (dataList as? ArrayList<NewsApiData>)?.clear()
+        notifyDataSetChanged()
+    }
+
+    fun filter(name: String) {
+        val temp : MutableList<NewsApiData> = mutableListOf()
+        for (d in dataList) {
+            if (d.title?.lowercase()?.contains(name)!!) {
+                temp.add(d)
+            }
+        }
+        updateList(temp)
+    }
+
+    private fun updateList(list : List<NewsApiData>) {
+        dataList = list as MutableList<NewsApiData>
         notifyDataSetChanged()
     }
 }

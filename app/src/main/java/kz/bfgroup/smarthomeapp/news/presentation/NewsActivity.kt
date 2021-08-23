@@ -3,9 +3,7 @@ package kz.bfgroup.smarthomeapp.news.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
@@ -31,6 +29,10 @@ class NewsActivity : AppCompatActivity() {
 //    private var count = 0
     private val newsAdapter = NewsAdapter(getNewsClickListener())
 
+    private lateinit var toolbarTitleTextView: TextView
+    private var searchingNewsList: List<NewsApiData> = listOf()
+    private lateinit var searchView: SearchView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +40,20 @@ class NewsActivity : AppCompatActivity() {
 
         initViews()
 
+        searchView.setOnSearchClickListener {
+            toolbarTitleTextView.visibility = View.GONE
+        }
+        searchView.setOnCloseListener {
+            toolbarTitleTextView.visibility = View.VISIBLE
+            false
+        }
+
         backButton.setOnClickListener {
             onBackPressed()
         }
 
         loadApiData()
+        queryInSearchView()
     }
 
     private fun initViews() {
@@ -58,6 +69,9 @@ class NewsActivity : AppCompatActivity() {
         recyclerView.visibility = View.INVISIBLE
 //        scrollDownButton = findViewById(R.id.scroll_down_recyclerview)
 //        scrollUpButton = findViewById(R.id.scroll_up_recyclerview)
+
+        toolbarTitleTextView = findViewById(R.id.activity_news_list_toolbar_text_view)
+        searchView = findViewById(R.id.activity_news_list_toolbar_search_view)
     }
 
     private fun loadApiData() {
@@ -82,6 +96,34 @@ class NewsActivity : AppCompatActivity() {
                 Toast.makeText(this@NewsActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
+        })
+    }
+
+    private fun queryInSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                searchView.clearFocus()
+                val queryText = p0?.lowercase()
+
+                newsAdapter.filter(queryText!!)
+
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+
+                val queryText = p0?.lowercase()
+
+                val newNewsList : MutableList<NewsApiData> = mutableListOf()
+                for (q in searchingNewsList) {
+                    if (q.title?.contains(queryText!!)!!) {
+                        newNewsList.add(q)
+                    }
+                }
+                newsAdapter.setList(newNewsList)
+
+                return false
+            }
         })
     }
 

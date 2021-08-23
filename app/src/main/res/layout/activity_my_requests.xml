@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".my_requests.MyRequestsActivity">
 
+
+    <ProgressBar
+        android:id="@+id/activity_my_request_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,15 +23,23 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/activity_my_request_recyclerview"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/activity_my_request_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/my_request_item"
-            android:clipToPadding="false"
-            android:paddingTop="20dp"
-            android:paddingBottom="70dp"
-            />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_my_request_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/my_request_item"
+                android:clipToPadding="false"
+                android:paddingTop="20dp"
+                android:paddingBottom="70dp"
+                />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </LinearLayout>
 

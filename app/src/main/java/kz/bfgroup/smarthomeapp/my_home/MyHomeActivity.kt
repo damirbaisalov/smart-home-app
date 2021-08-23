@@ -5,9 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -23,8 +21,7 @@ import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomePassportApiData
-import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
-import kz.bfgroup.smarthomeapp.registration.MY_APP
+import kz.bfgroup.smarthomeapp.registration.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +48,9 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
     private lateinit var searchManager: SearchManager
     private lateinit var homeAddressText : String
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var myHomeLayout: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.initialize(this)
         super.onCreate(savedInstanceState)
@@ -67,9 +67,10 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
         backButton.setOnClickListener {
             onBackPressed()
         }
-
-        loadApiData()
-        loadApiData2()
+        if (loadApiData() && loadApiData2()) {
+            progressBar.visibility = View.GONE
+            myHomeLayout.visibility = View.VISIBLE
+        }
 
     }
 
@@ -94,15 +95,17 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
         mapView.map.addCameraListener(this)
         mapView.map.isScrollGesturesEnabled = false
         mapView.map.isZoomGesturesEnabled = false
+        progressBar = findViewById(R.id.activity_my_home_progress_bar)
+        myHomeLayout = findViewById(R.id.activity_my_home_layout)
+        myHomeLayout.visibility = View.INVISIBLE
     }
 
-    private fun loadApiData() {
+    private fun loadApiData(): Boolean {
         ApiRetrofit.getApiClient().getMyHomeAddress(getSavedHomeId()).enqueue(object: Callback<HomeApiData> {
             override fun onResponse(
                 call: Call<HomeApiData>,
                 response: Response<HomeApiData>
             ) {
-//                progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
 
                     val responseBody = response.body()!!
@@ -118,14 +121,16 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
             }
 
             override fun onFailure(call: Call<HomeApiData>, t: Throwable) {
-//                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE
                 Toast.makeText(this@MyHomeActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
         })
+
+        return true
     }
 
-    private fun loadApiData2() {
+    private fun loadApiData2(): Boolean {
         ApiRetrofit.getApiClient().getMyHomePassport(getSavedHomeId()).enqueue(object: Callback<HomePassportApiData> {
             override fun onResponse(
                 call: Call<HomePassportApiData>,
@@ -153,11 +158,13 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
             }
 
             override fun onFailure(call: Call<HomePassportApiData>, t: Throwable) {
-//                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE
                 Toast.makeText(this@MyHomeActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
         })
+
+        return true
     }
 
     private fun submitQuery(query: String) {

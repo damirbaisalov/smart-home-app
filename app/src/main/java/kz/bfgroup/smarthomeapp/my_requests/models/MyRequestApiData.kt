@@ -20,5 +20,7 @@ data class MyRequestApiData(
     @JsonProperty("ksk_id")
     val ksk_id: String?,
     @JsonProperty("tenants_id")
-    val tenants_id: String?
+    val tenants_id: String?,
+    @JsonProperty("adress")
+    val address: String
 )

@@ -2,8 +2,8 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_menu_activity_toolbar_gradient">
-
 
     <ImageButton
         android:id="@+id/activity_my_request_back_button"
@@ -15,6 +15,7 @@
         android:padding="4dp"/>
 
     <TextView
+        android:id="@+id/activity_my_request_toolbar_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Мои заявки"
@@ -23,20 +24,17 @@
         android:textStyle="bold"
         />
 
-    <LinearLayout
+    <SearchView
+        android:id="@+id/activity_my_request_toolbar_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end">
+        android:layoutDirection="rtl"
+        android:iconifiedByDefault="true"
+        android:closeIcon="@drawable/ic_close"
+        android:searchIcon="@drawable/ic_search"
+        android:queryBackground="@null"
+        android:queryHint="Поиск заявки"
+        />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:background="@drawable/bg_ripple_effect"
-            android:layout_marginEnd="15dp"
-            android:padding="10dp"
-            />
-
-    </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

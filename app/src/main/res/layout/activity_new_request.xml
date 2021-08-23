@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_marginHorizontal="30dp"
-                    android:text="Павлодар, Ак. Чокина 98"
+                    android:text="Нет данных"
                     />
 
                 <View

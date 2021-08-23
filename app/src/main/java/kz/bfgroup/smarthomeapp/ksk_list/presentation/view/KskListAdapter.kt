@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
+import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 
 class KskListAdapter(
     private val kskItemClickListener: KskItemClickListener
@@ -38,6 +39,21 @@ class KskListAdapter(
 
     fun clearAll() {
         (dataList as? ArrayList<KskApiData>)?.clear()
+        notifyDataSetChanged()
+    }
+
+    fun filter(name: String) {
+        val temp : MutableList<KskApiData> = mutableListOf()
+        for (d in dataList) {
+            if (d.kskName?.lowercase()?.contains(name)!!) {
+                temp.add(d)
+            }
+        }
+        updateList(temp)
+    }
+
+    private fun updateList(list : List<KskApiData>) {
+        dataList = list as MutableList<KskApiData>
         notifyDataSetChanged()
     }
 }

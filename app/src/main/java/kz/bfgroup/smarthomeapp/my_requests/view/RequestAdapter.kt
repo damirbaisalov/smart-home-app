@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
+import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 
 class RequestAdapter: RecyclerView.Adapter<RequestViewHolder>() {
 
@@ -34,6 +35,21 @@ class RequestAdapter: RecyclerView.Adapter<RequestViewHolder>() {
 
     fun clearAll() {
         (dataList as? ArrayList<MyRequestApiData>)?.clear()
+        notifyDataSetChanged()
+    }
+
+    fun filter(name: String) {
+        val temp : MutableList<MyRequestApiData> = mutableListOf()
+        for (d in dataList) {
+            if (d.heading?.lowercase()?.contains(name)!!) {
+                temp.add(d)
+            }
+        }
+        updateList(temp)
+    }
+
+    private fun updateList(list : List<MyRequestApiData>) {
+        dataList = list as MutableList<MyRequestApiData>
         notifyDataSetChanged()
     }
 }

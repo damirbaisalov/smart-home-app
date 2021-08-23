@@ -34,6 +34,9 @@ class MyKskActivity : AppCompatActivity() {
     private lateinit var openVoteListButton: TextView
     private lateinit var kskTitle: String
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var myKskLayout: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_ksk)
@@ -70,6 +73,9 @@ class MyKskActivity : AppCompatActivity() {
         progressBar1TextView = findViewById(R.id.progress_bar1_text_inside)
         progressBar2TextView = findViewById(R.id.progress_bar2_text_inside)
         openVoteListButton = findViewById(R.id.open_vote_list_button)
+        progressBar = findViewById(R.id.activity_my_ksk_progress_bar)
+        myKskLayout = findViewById(R.id.my_ksk_layout)
+        myKskLayout.visibility = View.INVISIBLE
     }
 
     private fun loadApiData() {
@@ -78,7 +84,8 @@ class MyKskActivity : AppCompatActivity() {
                 call: Call<MyKskApiData>,
                 response: Response<MyKskApiData>
             ) {
-//                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE
+                myKskLayout.visibility = View.VISIBLE
                 if (response.isSuccessful) {
 
                     val responseBody = response.body()!!
@@ -127,7 +134,7 @@ class MyKskActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-//                progressBar.visibility = View.GONE
+                progressBar.visibility = View.GONE
                 Toast.makeText(this@MyKskActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
