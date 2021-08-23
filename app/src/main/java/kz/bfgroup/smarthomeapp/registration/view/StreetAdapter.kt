@@ -37,4 +37,20 @@ class StreetAdapter(
         (dataList as? ArrayList<StreetApiData>)?.clear()
         notifyDataSetChanged()
     }
+
+
+    fun filter(name: String) {
+        val temp : MutableList<StreetApiData> = mutableListOf()
+        for (d in dataList) {
+            if (d.street?.lowercase()?.contains(name)!!) {
+                temp.add(d)
+            }
+        }
+        updateList(temp)
+    }
+
+    private fun updateList(list : List<StreetApiData>) {
+        dataList = list as MutableList<StreetApiData>
+        notifyDataSetChanged()
+    }
 }

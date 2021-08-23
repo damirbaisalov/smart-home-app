@@ -10,6 +10,7 @@ import kz.bfgroup.smarthomeapp.ksk_list.presentation.KskListActivity
 import kz.bfgroup.smarthomeapp.login.LoginActivity
 import kz.bfgroup.smarthomeapp.my_home.MyHomeActivity
 import kz.bfgroup.smarthomeapp.my_ksk.MyKskActivity
+import kz.bfgroup.smarthomeapp.my_requests.MyRequestsActivity
 import kz.bfgroup.smarthomeapp.news.presentation.NewsActivity
 import kz.bfgroup.smarthomeapp.registration.GENERATED_ACCESS_TOKEN
 import kz.bfgroup.smarthomeapp.registration.MY_APP
@@ -54,7 +55,7 @@ class MenuActivity : AppCompatActivity() {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             } else {
-                val intent = Intent(this, MyHomeActivity::class.java)
+                val intent = Intent(this, MyRequestsActivity::class.java)
                 startActivity(intent)
             }
         }

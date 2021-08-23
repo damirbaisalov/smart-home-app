@@ -1,17 +1,18 @@
 package kz.bfgroup.smarthomeapp.registration
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.basgeekball.awesomevalidation.AwesomeValidation
 import com.basgeekball.awesomevalidation.ValidationStyle
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
+import com.mukesh.tinydb.TinyDB
 import kz.bfgroup.smarthomeapp.R
+import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -19,9 +20,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInputNewListener {
+class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, StreetListDialogFragment.OnInputNewListener{
 
     private val bundle = Bundle()
+    var day = 0
+    var month = 0
+    var year = 0
+    var savedDay = 0
+    var savedMonth = 0
+    var savedYear = 0
     private lateinit var registerButton: Button
     private lateinit var validation: AwesomeValidation
 
@@ -34,6 +41,9 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
     private lateinit var userEntranceEditText: EditText
     private lateinit var userTelephoneEditText: EditText
     private lateinit var userPasswordEditText: EditText
+    private lateinit var tinyDB: TinyDB
+
+    private val loadingDialog: LoadingDialog = LoadingDialog(this)
 
     private var userNameSurnameFormatted: String = ""
     private var userDadNameFormatted: String = ""
@@ -46,43 +56,27 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
 
         formValidation()
 
-        userAddressEditText.isFocusable = false
         userAddressEditText.setOnClickListener {
             val dialog = StreetListDialogFragment()
             dialog.show(supportFragmentManager, "streetListDialogFragment")
+//            val intent = Intent(this, StreetListActivity::class.java)
+//            startActivity(intent)
         }
 
-        userBirthdayEditText.isFocusable = false
-        userBirthdayEditText.setOnClickListener {
-            val calendarData = Calendar.getInstance()
-            val day = calendarData.get(Calendar.DAY_OF_MONTH)
-            val month = calendarData.get(Calendar.MONTH)
-            val year = calendarData.get(Calendar.YEAR)
-
-            val dpd = DatePickerDialog(
-                this,
-                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    userBirthdayEditText.setText(""+ dayOfMonth + "." + (monthOfYear + 1) + "." + year)
-                    validation.addValidation(
-                        this,
-                        R.id.user_birthday,
-                        RegexTemplate.NOT_EMPTY,
-                        R.string.required_field
-                    )
-                },
-                year,
-                month,
-                day
-            )
-
-            dpd.show()
-        }
+        pickDate()
 
         registerButton.setOnClickListener {
-            showToast(formatTelephoneNumber(userTelephoneEditText.text.toString()).trim())
+
             if (validation.validate() &&
-                formatTelephoneNumber(userTelephoneEditText.text.toString()).trim().isNotEmpty()
+                formatTelephoneNumber(userTelephoneEditText.text.toString()).length==11
                 && userAddressEditText.text.toString().isNotEmpty()) {
+
+                loadingDialog.startLoadingDialog()
+
+                val handler = Handler()
+                handler.postDelayed(Runnable {
+                    loadingDialog.dialogDismiss()
+                }, 5000)
 
                 val list = userFIOEditText.text.toString().split(" ")
                 when(list.size) {
@@ -118,7 +112,7 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
 
             } else if (validation.validate() && userAddressEditText.text.toString().isEmpty()) {
                 showToast("Выберите адрес из списка")
-            } else if (validation.validate() && formatTelephoneNumber(userTelephoneEditText.text.toString()).trim().isEmpty()) {
+            } else if (validation.validate() && formatTelephoneNumber(userTelephoneEditText.text.toString()).length<10) {
                 showToast("Введите номер")
             } else {
                 showToast("Заполните все поля")
@@ -137,8 +131,35 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
         userTelephoneEditText = findViewById(R.id.user_telephone)
         userPasswordEditText = findViewById(R.id.user_password)
         registerButton = findViewById(R.id.submit_user_data_button)
+        userBirthdayEditText.isFocusable = false
+        userAddressEditText.isFocusable = false
 
         validation = AwesomeValidation(ValidationStyle.BASIC)
+        tinyDB = TinyDB(applicationContext)
+
+    }
+
+    private fun pickDate() {
+        userBirthdayEditText.setOnClickListener {
+            val cal = Calendar.getInstance()
+            day = cal.get(Calendar.DAY_OF_MONTH)
+            month = cal.get(Calendar.MONTH)
+            year = cal.get(Calendar.YEAR)
+
+            DatePickerDialog(this, this,year,month,day).show()
+        }
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        savedDay = dayOfMonth
+        savedMonth = month
+        savedMonth+=1
+        var convertedMonth = savedMonth.toString()
+        if (savedMonth.toString().length==1) {
+            convertedMonth = "0$savedMonth"
+        }
+        savedYear = year
+        userBirthdayEditText.setText("$savedDay.$convertedMonth.$savedYear")
     }
 
     private fun sendSmsCode() {
@@ -207,6 +228,19 @@ class RegistrationActivity : AppCompatActivity(), StreetListDialogFragment.OnInp
             R.string.required_field
         )
 
+        validation.addValidation(
+            this,
+            R.id.user_street,
+            RegexTemplate.NOT_EMPTY,
+            R.string.required_field
+        )
+
+        validation.addValidation(
+            this,
+            R.id.user_birthday,
+            RegexTemplate.NOT_EMPTY,
+            R.string.required_field
+        )
     }
 
     override fun inputAddress(street: String?, number: String?) {

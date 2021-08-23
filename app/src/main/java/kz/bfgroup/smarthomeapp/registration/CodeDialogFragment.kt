@@ -1,9 +1,11 @@
 package kz.bfgroup.smarthomeapp.registration
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +16,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import kz.bfgroup.smarthomeapp.MenuActivity
 import kz.bfgroup.smarthomeapp.R
+import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.registration.models.UserApiData
 import okhttp3.ResponseBody
@@ -49,6 +52,7 @@ class CodeDialogFragment: DialogFragment() {
     private lateinit var userTelephone : String
     private lateinit var userPassword : String
 
+
     private var okRequest = false
     private lateinit var fields: Map<String,String>
 
@@ -81,6 +85,7 @@ class CodeDialogFragment: DialogFragment() {
         codeEditTextLogic()
 
         confirmRegCode.setOnClickListener {
+
             val code4signs = code1EditText.text.toString() +
                     code2EditText.text.toString() +
                     code3EditText.text.toString() +
@@ -127,6 +132,9 @@ class CodeDialogFragment: DialogFragment() {
             override fun onResponse(call: Call<UserApiData>, response: Response<UserApiData>) {
 
                 if (response.isSuccessful){
+                    if (response.body()!!.mess_status == "0") {
+                        showToast(response.body()!!.mess)
+                    } else {
                         showToast(response.body()!!.mess)
                         saveUserDataNeeded(
                             response.body()!!.serial_number!!,
@@ -134,6 +142,7 @@ class CodeDialogFragment: DialogFragment() {
                             response.body()!!.home_id!!,
                             response.body()!!.ksk_id!!
                         )
+                    }
                 }
             }
 

@@ -113,19 +113,6 @@
         android:textSize="12sp"
         android:background="@drawable/bg_activity_registration_submit_button"
         android:layout_marginTop="30dp"
-
-        />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Повторно отправить код"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:background="@drawable/bg_activity_registration_submit_button"
-        android:layout_marginTop="10dp"
         />
 
     <Button

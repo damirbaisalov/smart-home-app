@@ -162,7 +162,6 @@
                 android:maxLines="1"
                 mask:allowed_chars="1234567890"
                 mask:mask="+7(###)###-##-##"
-                android:hint="**********"
                 />
 
             <EditText

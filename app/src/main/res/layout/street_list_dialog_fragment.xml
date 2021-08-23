@@ -29,7 +29,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/street_list_dialog_fragment_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:layout_marginTop="8dp"
                     tools:itemCount="10"
@@ -40,8 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="visible"
                     android:paddingHorizontal="170dp"
-                    android:paddingVertical="50dp"
                     />
 
         </LinearLayout>

@@ -1,18 +1,14 @@
 package kz.bfgroup.smarthomeapp.registration
 
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mukesh.tinydb.TinyDB
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
@@ -21,53 +17,37 @@ import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.ClassCastException
 
-class StreetListDialogFragment: DialogFragment() {
+class StreetListActivity : AppCompatActivity() {
 
-    private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
     private var streetAdapter = StreetAdapter(getStreetClickListener())
     private lateinit var searchView: SearchView
     private var searchingStreetList: List<StreetApiData> = listOf()
     private lateinit var progressBar: ProgressBar
+    private lateinit var tinyDB: TinyDB
 
-    interface OnInputNewListener {
-        fun inputAddress(street : String?, number: String?)
-    }
-
-    private lateinit var onInputNewListener: OnInputNewListener
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        rootView = inflater.inflate(R.layout.street_list_dialog_fragment,container,false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_street_list)
 
         bindViews()
-
         loadApiData()
-
         queryInSearchView()
 
-        return rootView
     }
 
     private fun bindViews() {
-        recyclerView = rootView.findViewById(R.id.street_list_dialog_fragment_recyclerview)
-        recyclerView.visibility = View.GONE
+        recyclerView = findViewById(R.id.street_list_dialog_fragment_recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(
-            rootView.context,
+            this,
             LinearLayoutManager.VERTICAL,
             false
         )
         recyclerView.adapter = streetAdapter
-        searchView = rootView.findViewById(R.id.street_list_dialog_fragment_search_view)
-        progressBar = rootView.findViewById(R.id.street_list_dialog_fragment_progressbar)
-        progressBar.visibility = View.VISIBLE
+        searchView = findViewById(R.id.street_list_dialog_fragment_search_view)
+        progressBar = findViewById(R.id.street_list_dialog_fragment_progressbar)
+        tinyDB = TinyDB(applicationContext)
     }
 
     private fun loadApiData() {
@@ -78,7 +58,6 @@ class StreetListDialogFragment: DialogFragment() {
                 response: Response<List<StreetApiData>>
             ) {
                 progressBar.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
 //                recyclerView.visibility = View.VISIBLE
                 if (response.isSuccessful) {
                     val streetApiDataResponseList: MutableList<StreetApiData> = mutableListOf()
@@ -91,8 +70,7 @@ class StreetListDialogFragment: DialogFragment() {
 
             override fun onFailure(call: Call<List<StreetApiData>>, t: Throwable) {
                 progressBar.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
-                Toast.makeText(rootView.context, t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@StreetListActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
         })
@@ -130,18 +108,13 @@ class StreetListDialogFragment: DialogFragment() {
     private fun getStreetClickListener(): StreetClickListener {
         return object: StreetClickListener {
             override fun onClick(street: String?, nomer: String?) {
-                onInputNewListener.inputAddress(street, nomer)
-                dismiss()
-            }
-        }
-    }
+//                onInputNewListener.inputAddress(street, nomer)
+//                dismiss()
+                tinyDB.putString("street_tiny_db", street)
+                tinyDB.putString("nomer_tiny_db", nomer)
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        try{
-            onInputNewListener = activity as OnInputNewListener
-        } catch (e: ClassCastException){
-            Log.d("TAG", "onAttach: ClassException: " + e.message)
+                finish()
+            }
         }
     }
 }
