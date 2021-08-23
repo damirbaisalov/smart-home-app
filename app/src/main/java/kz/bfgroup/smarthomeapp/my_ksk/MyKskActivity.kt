@@ -1,6 +1,8 @@
 package kz.bfgroup.smarthomeapp.my_ksk
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +11,9 @@ import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_ksk.models.MyKskApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
+import kz.bfgroup.smarthomeapp.registration.GENERATED_ACCESS_TOKEN
+import kz.bfgroup.smarthomeapp.registration.GENERATED_KSK_ID
+import kz.bfgroup.smarthomeapp.registration.MY_APP
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -68,7 +73,7 @@ class MyKskActivity : AppCompatActivity() {
     }
 
     private fun loadApiData() {
-        ApiRetrofit.getApiClient().getMyKsk("121").enqueue(object: Callback<MyKskApiData> {
+        ApiRetrofit.getApiClient().getMyKsk(getSavedKskId()).enqueue(object: Callback<MyKskApiData> {
             override fun onResponse(
                 call: Call<MyKskApiData>,
                 response: Response<MyKskApiData>
@@ -106,7 +111,7 @@ class MyKskActivity : AppCompatActivity() {
     }
 
     private fun loadApiData2() {
-        ApiRetrofit.getApiClient().getKskHomeNum("121").enqueue(object: Callback<String> {
+        ApiRetrofit.getApiClient().getKskHomeNum(getSavedKskId()).enqueue(object: Callback<String> {
             override fun onResponse(
                 call: Call<String>,
                 response: Response<String>
@@ -127,5 +132,14 @@ class MyKskActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun getSavedKskId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_KSK_ID, "default") ?: "default"
     }
 }

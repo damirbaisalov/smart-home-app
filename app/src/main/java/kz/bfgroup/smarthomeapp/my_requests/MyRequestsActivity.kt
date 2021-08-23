@@ -1,6 +1,8 @@
 package kz.bfgroup.smarthomeapp.my_requests
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -15,6 +17,9 @@ import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
 import kz.bfgroup.smarthomeapp.my_ksk.view.CandidateAdapter
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.my_requests.view.RequestAdapter
+import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
+import kz.bfgroup.smarthomeapp.registration.GENERATED_USER_ID
+import kz.bfgroup.smarthomeapp.registration.MY_APP
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,8 +63,8 @@ class MyRequestsActivity : AppCompatActivity() {
         recyclerView.adapter = myRequestAdapter
 
         fields = mutableMapOf(
-            "zayavki_tenant_id" to "59",
-            "zayavki_home_id" to "1020"
+            "zayavki_tenant_id" to getSavedUserId(),
+            "zayavki_home_id" to getSavedHomeId()
         )
     }
 
@@ -92,5 +97,23 @@ class MyRequestsActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         loadApiData(fields)
+    }
+
+    private fun getSavedUserId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_USER_ID, "default") ?: "default"
+    }
+
+    private fun getSavedHomeId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_HOME_ID, "default") ?: "default"
     }
 }

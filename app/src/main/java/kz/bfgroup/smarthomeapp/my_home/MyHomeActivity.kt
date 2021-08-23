@@ -1,5 +1,7 @@
 package kz.bfgroup.smarthomeapp.my_home
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,6 +23,8 @@ import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomePassportApiData
+import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
+import kz.bfgroup.smarthomeapp.registration.MY_APP
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -93,7 +97,7 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
     }
 
     private fun loadApiData() {
-        ApiRetrofit.getApiClient().getMyHomeAddress("1020").enqueue(object: Callback<HomeApiData> {
+        ApiRetrofit.getApiClient().getMyHomeAddress(getSavedHomeId()).enqueue(object: Callback<HomeApiData> {
             override fun onResponse(
                 call: Call<HomeApiData>,
                 response: Response<HomeApiData>
@@ -122,7 +126,7 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
     }
 
     private fun loadApiData2() {
-        ApiRetrofit.getApiClient().getMyHomePassport("1020").enqueue(object: Callback<HomePassportApiData> {
+        ApiRetrofit.getApiClient().getMyHomePassport(getSavedHomeId()).enqueue(object: Callback<HomePassportApiData> {
             override fun onResponse(
                 call: Call<HomePassportApiData>,
                 response: Response<HomePassportApiData>
@@ -130,18 +134,21 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 //                progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
 
-                    val responseBody = response.body()!!
-                    myHomeYearConst.text = (responseBody.year_construction + " год")
-                    myHomeTotalArea.text = (responseBody.total_area + " м2")
-                    myHomeFloorNum.text = (responseBody.number_floor + " этажей")
-                    myHomeFlatNum.text = responseBody.number_apartments //need to change
-                    myHomeLiftNum.text = responseBody.number_apartments //need to change
-                    myHomeVideoSpec.text = (responseBody.number_floor + " шт.") //need to change
-                    myHomeKrovlya.text = (responseBody.living_area + " м2") //need to change
-                    myHomeFasad.text = (responseBody.area_premises + " м2") //need to change
-                    myHomeBalkon.text = (responseBody.balcony_area + " м2")
-                    myHomeDolg.text = "0 тенге" //need to change
-
+                    if (response.body() == null) {
+                        Toast.makeText(this@MyHomeActivity, "NET DOMA", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val responseBody = response.body()!!
+                        myHomeYearConst.text = (responseBody.year_construction + " год")
+                        myHomeTotalArea.text = (responseBody.total_area + " м2")
+                        myHomeFloorNum.text = (responseBody.number_floor + " этажей")
+                        myHomeFlatNum.text = responseBody.number_apartments //need to change
+                        myHomeLiftNum.text = responseBody.number_apartments //need to change
+                        myHomeVideoSpec.text = (responseBody.number_floor + " шт.") //need to change
+                        myHomeKrovlya.text = (responseBody.living_area + " м2") //need to change
+                        myHomeFasad.text = (responseBody.area_premises + " м2") //need to change
+                        myHomeBalkon.text = (responseBody.balcony_area + " м2")
+                        myHomeDolg.text = "0 тенге" //need to change
+                    }
                 }
             }
 
@@ -223,5 +230,14 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 //       if (p3) {
 //           submitQuery("Камзина, 167")
 //       }
+    }
+
+    private fun getSavedHomeId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_HOME_ID, "default") ?: "default"
     }
 }

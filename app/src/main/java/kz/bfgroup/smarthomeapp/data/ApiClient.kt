@@ -7,6 +7,8 @@ import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
 import kz.bfgroup.smarthomeapp.my_ksk.models.MyKskApiData
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
+import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
+import kz.bfgroup.smarthomeapp.registration.models.UserApiData
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -16,6 +18,10 @@ interface ApiClient {
 
     @GET("ListKSK.php")
     fun getKskList(): Call<List<KskApiData>>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun userLogin(@FieldMap fields: Map<String, String>) : Call<UserApiData>
 
     @FormUrlEncoded
     @POST("post.php")
@@ -52,4 +58,16 @@ interface ApiClient {
     @FormUrlEncoded
     @POST("post.php")
     fun sendNewRequest(@FieldMap fields: Map<String, String>): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("sms_code.php")
+    fun sendSMSCode(@Field("verify_number_tenants") phone: String) : Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun registerUser(@FieldMap fields: Map<String, String>) : Call<UserApiData>
+
+    @GET("orderByName.php")
+    fun getHomeList(): Call<List<StreetApiData>>
+
 }

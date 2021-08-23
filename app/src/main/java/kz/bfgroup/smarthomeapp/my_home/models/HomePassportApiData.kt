@@ -24,5 +24,5 @@ data class HomePassportApiData(
     @JsonProperty("number_apartments")
     val number_apartments: String?,
     @JsonProperty("series_project")
-    val series_project: String?,
+    val series_project: String?
 )

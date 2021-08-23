@@ -1,6 +1,8 @@
 package kz.bfgroup.smarthomeapp.my_requests
 
+import android.content.Context
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -11,6 +13,10 @@ import androidx.appcompat.app.AlertDialog
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
+import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
+import kz.bfgroup.smarthomeapp.registration.GENERATED_KSK_ID
+import kz.bfgroup.smarthomeapp.registration.GENERATED_USER_ID
+import kz.bfgroup.smarthomeapp.registration.MY_APP
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,9 +52,9 @@ class NewRequestActivity : AppCompatActivity() {
                 fields = mutableMapOf(
                     "heading" to requestTitleTrim,
                     "message_text" to requestMessageTrim,
-                    "apply_home_id" to "1020",
-                    "apply_ksk_id" to "121",
-                    "apply_tenants_id" to "59"
+                    "apply_home_id" to getSavedHomeId(),
+                    "apply_ksk_id" to getSavedKskId(),
+                    "apply_tenants_id" to getSavedUserId()
                 )
                 sendRequest()
             }
@@ -91,5 +97,32 @@ class NewRequestActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun getSavedUserId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_USER_ID, "default") ?: "default"
+    }
+
+    private fun getSavedHomeId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_HOME_ID, "default") ?: "default"
+    }
+
+    private fun getSavedKskId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_KSK_ID, "default") ?: "default"
     }
 }

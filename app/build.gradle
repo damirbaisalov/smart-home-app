@@ -67,4 +67,13 @@ dependencies {
     // веломаршрутизацию, пешеходную маршрутизацию и маршрутизацию на общественном транспорте,
     // поиск, suggest, геокодирование и отображение панорам.
     implementation 'com.yandex.android:maps.mobile:4.0.0-full'
+
+    //input-mask-edit-text
+    implementation 'ru.egslava:MaskedEditText:1.0.5'
+
+    //form-validation
+    implementation 'com.basgeekball:awesome-validation:4.2'
+
+    //tinyDb
+    compile 'com.mukesh:tinydb:1.0.1'
 }
