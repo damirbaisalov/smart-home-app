@@ -1,5 +1,7 @@
 package kz.bfgroup.smarthomeapp.ksk_list.presentation
 
+import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
+import kz.bfgroup.smarthomeapp.ksk_detailed.KskDetailActivity
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskItemClickListener
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskListAdapter
@@ -30,6 +33,7 @@ class KskListActivity : AppCompatActivity() {
 
     private lateinit var toolbarTitleTextView: TextView
     private var searchingKskList: List<KskApiData> = listOf()
+    private lateinit var tempArrayList : ArrayList<KskApiData>
     private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +92,10 @@ class KskListActivity : AppCompatActivity() {
 
         toolbarTitleTextView = findViewById(R.id.activity_ksk_list_toolbar_text_view)
         searchView = findViewById(R.id.activity_ksk_list_toolbar_search_view)
+        val magId = searchView.context.resources.getIdentifier("android:id/search_src_text", null, null)
+        val magTextView = searchView.findViewById<TextView>(magId)
+        magTextView.setTextColor(Color.WHITE)
+
     }
 
     private fun loadApiData() {
@@ -117,28 +125,38 @@ class KskListActivity : AppCompatActivity() {
         })
     }
 
+
     private fun queryInSearchView() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 searchView.clearFocus()
+
                 val queryText = p0?.lowercase()
+
 
                 kskListAdapter.filter(queryText!!)
 
+
                 return false
+
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
 
                 val queryText = p0?.lowercase()
 
-                val newRequestList : MutableList<KskApiData> = mutableListOf()
+//                cafeAdapter?.filter(queryText!!)
+//
+//                if (queryText?.isEmpty()!!)
+//                    cafeAdapter?.setList(searchingCafeList)
+
+                val newKskList : MutableList<KskApiData> = mutableListOf()
                 for (q in searchingKskList) {
-                    if (q.kskName?.contains(queryText!!)!!) {
-                        newRequestList.add(q)
+                    if (q.kskName?.lowercase()?.contains(queryText!!)!!) {
+                        newKskList.add(q)
                     }
                 }
-                kskListAdapter.setList(newRequestList)
+                kskListAdapter.setList(newKskList)
 
                 return false
             }
@@ -148,7 +166,9 @@ class KskListActivity : AppCompatActivity() {
     private fun getKskItemClickListener(): KskItemClickListener {
         return object: KskItemClickListener {
             override fun onKskClick(id: String?) {
-                Toast.makeText(this@KskListActivity, id, Toast.LENGTH_LONG).show()
+                val intent = Intent(this@KskListActivity, KskDetailActivity::class.java)
+                intent.putExtra("ksk_info_id", id)
+                startActivity(intent)
             }
         }
     }

@@ -61,10 +61,11 @@
                     <TextView
                         android:id="@+id/activity_candidates_my_ksk_title"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="3dp"
                         android:text=""/>
                 </LinearLayout>
 
@@ -89,9 +90,10 @@
                     <TextView
                         android:id="@+id/my_ksk_employee_num"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="3dp"
                         android:text="Численность сотрудников \n Нет данных"/>
                 </LinearLayout>
 

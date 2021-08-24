@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mukesh.tinydb.TinyDB
+//import com.mukesh.tinydb.TinyDB
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
@@ -25,7 +25,7 @@ class StreetListActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private var searchingStreetList: List<StreetApiData> = listOf()
     private lateinit var progressBar: ProgressBar
-    private lateinit var tinyDB: TinyDB
+//    private lateinit var tinyDB: TinyDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class StreetListActivity : AppCompatActivity() {
         recyclerView.adapter = streetAdapter
         searchView = findViewById(R.id.street_list_dialog_fragment_search_view)
         progressBar = findViewById(R.id.street_list_dialog_fragment_progressbar)
-        tinyDB = TinyDB(applicationContext)
+//        tinyDB = TinyDB(applicationContext)
     }
 
     private fun loadApiData() {
@@ -110,8 +110,8 @@ class StreetListActivity : AppCompatActivity() {
             override fun onClick(street: String?, nomer: String?) {
 //                onInputNewListener.inputAddress(street, nomer)
 //                dismiss()
-                tinyDB.putString("street_tiny_db", street)
-                tinyDB.putString("nomer_tiny_db", nomer)
+//                tinyDB.putString("street_tiny_db", street)
+//                tinyDB.putString("nomer_tiny_db", nomer)
 
                 finish()
             }

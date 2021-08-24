@@ -42,7 +42,8 @@ class StreetAdapter(
     fun filter(name: String) {
         val temp : MutableList<StreetApiData> = mutableListOf()
         for (d in dataList) {
-            if (d.street?.lowercase()?.contains(name)!!) {
+            val streetPlusNomer = (d.street?.lowercase() + ", " + d.nomer?.lowercase()).lowercase()
+            if (streetPlusNomer.contains(name)) {
                 temp.add(d)
             }
         }

@@ -11,7 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.SmartHomeApp">
+        <activity android:name=".ksk_detailed.KskDetailActivity" />
         <activity android:name=".registration.StreetListActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".registration.RegistrationActivity" />

@@ -1,5 +1,6 @@
 package kz.bfgroup.smarthomeapp.data
 
+import kz.bfgroup.smarthomeapp.ksk_detailed.models.KskDetailedApiData
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomePassportApiData
@@ -69,5 +70,9 @@ interface ApiClient {
 
     @GET("orderByName.php")
     fun getHomeList(): Call<List<StreetApiData>>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun getKskById(@Field("ksk_one_info_id") kskId: String) : Call<KskDetailedApiData>
 
 }

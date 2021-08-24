@@ -63,10 +63,11 @@
                     <TextView
                         android:id="@+id/my_ksk_title"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="3dp"
                         android:text="Нет данных"/>
                 </LinearLayout>
 
@@ -91,10 +92,11 @@
                     <TextView
                         android:id="@+id/my_ksk_employee_num"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="3dp"
                         android:text="Нет данных"/>
                 </LinearLayout>
 
@@ -119,10 +121,11 @@
                     <TextView
                         android:id="@+id/my_ksk_contacts"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="3dp"
                         android:text="Нет данных"/>
                 </LinearLayout>
 
@@ -135,9 +138,8 @@
                 <LinearLayout
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginHorizontal="12dp"
-                    android:paddingBottom="5dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -148,10 +150,12 @@
                     <TextView
                         android:id="@+id/my_ksk_predsedatel"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
+                        android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
-                        android:text="Нет данных"/>
+                        android:text="Нет данных"
+                        android:layout_marginVertical="3dp"/>
                 </LinearLayout>
 
                 <View
@@ -176,11 +180,12 @@
                     <TextView
                         android:id="@+id/my_ksk_home_count"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:gravity="center_vertical"
                         android:layout_marginHorizontal="15dp"
-                        android:text="Нет данных"/>
+                        android:text="Нет данных"
+                        android:layout_marginVertical="3dp"/>
                 </LinearLayout>
 
             </LinearLayout>

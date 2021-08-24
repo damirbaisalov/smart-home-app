@@ -73,7 +73,4 @@ dependencies {
 
     //form-validation
     implementation 'com.basgeekball:awesome-validation:4.2'
-
-    //tinyDb
-    compile 'com.mukesh:tinydb:1.0.1'
 }

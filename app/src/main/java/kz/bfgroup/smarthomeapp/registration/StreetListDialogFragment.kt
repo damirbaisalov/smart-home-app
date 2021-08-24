@@ -115,8 +115,8 @@ class StreetListDialogFragment: DialogFragment() {
 
                 val newStreetList : MutableList<StreetApiData> = mutableListOf()
                 for (q in searchingStreetList) {
-                    val streetWithNomer = q.street?.lowercase() + ", " + q.nomer?.lowercase()
-                    if (streetWithNomer?.contains(queryText!!)!!) {
+                    val streetWithNomer = (q.street?.lowercase() + ", " + q.nomer?.lowercase()).lowercase()
+                    if (streetWithNomer.contains(queryText!!)) {
                         newStreetList.add(q)
                     }
                 }

@@ -5,8 +5,6 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 
 object ApiRetrofit {
 
-    const val BASE_URL = "https://15000pvl.kz/smart_dom/api/"
-
     const val BASE_URL2 = "http://f0497377.xsph.ru/ksk_tenants/api/"
 
     val okHttpClient = UnsafeOkHttpClient.unsafeOkHttpClient

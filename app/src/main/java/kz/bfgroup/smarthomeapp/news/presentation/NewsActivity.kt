@@ -11,6 +11,7 @@ import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskItemClickListener
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskListAdapter
+import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsAdapter
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsClickListener
@@ -103,20 +104,29 @@ class NewsActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 searchView.clearFocus()
+
                 val queryText = p0?.lowercase()
+
 
                 newsAdapter.filter(queryText!!)
 
+
                 return false
+
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
 
                 val queryText = p0?.lowercase()
 
+//                cafeAdapter?.filter(queryText!!)
+//
+//                if (queryText?.isEmpty()!!)
+//                    cafeAdapter?.setList(searchingCafeList)
+
                 val newNewsList : MutableList<NewsApiData> = mutableListOf()
                 for (q in searchingNewsList) {
-                    if (q.title?.contains(queryText!!)!!) {
+                    if (q.title?.lowercase()?.contains(queryText!!)!!) {
                         newNewsList.add(q)
                     }
                 }

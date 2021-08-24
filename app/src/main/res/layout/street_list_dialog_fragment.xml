@@ -21,6 +21,8 @@
                     app:queryHint="Поиск"
                     android:focusedByDefault="false"
                     android:layout_gravity="top"
+                    app:searchIcon="@drawable/ic_search"
+                    app:closeIcon="@drawable/ic_close"
                     android:background="@drawable/bg_search_view"
                     app:iconifiedByDefault="false"
                     app:queryBackground="@null"

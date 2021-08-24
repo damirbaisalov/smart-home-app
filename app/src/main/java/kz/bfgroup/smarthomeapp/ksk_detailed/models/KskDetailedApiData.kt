@@ -1,11 +1,11 @@
-package kz.bfgroup.smarthomeapp.ksk_list.models
+package kz.bfgroup.smarthomeapp.ksk_detailed.models
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class KskApiData(
+data class KskDetailedApiData(
     @JsonProperty("id")
     val id: String?,
     @JsonProperty("ksk_name")
@@ -21,5 +21,7 @@ data class KskApiData(
     @JsonProperty("doma_phones")
     val doma_phones: String?,
     @JsonProperty("reiting")
-    val reiting: String?
+    val reiting: String?,
+    @JsonProperty("addrs")
+    val addrs: List<StreetApiData>
 )

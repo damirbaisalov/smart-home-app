@@ -10,7 +10,6 @@ import android.widget.*
 import com.basgeekball.awesomevalidation.AwesomeValidation
 import com.basgeekball.awesomevalidation.ValidationStyle
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
-import com.mukesh.tinydb.TinyDB
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
@@ -41,7 +40,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
     private lateinit var userEntranceEditText: EditText
     private lateinit var userTelephoneEditText: EditText
     private lateinit var userPasswordEditText: EditText
-    private lateinit var tinyDB: TinyDB
+//    private lateinit var tinyDB: TinyDB
 
     private val loadingDialog: LoadingDialog = LoadingDialog(this)
 
@@ -135,7 +134,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         userAddressEditText.isFocusable = false
 
         validation = AwesomeValidation(ValidationStyle.BASIC)
-        tinyDB = TinyDB(applicationContext)
+//        tinyDB = TinyDB(applicationContext)
 
     }
 

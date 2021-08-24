@@ -59,12 +59,14 @@
                     android:id="@+id/activity_new_request_heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:layout_marginHorizontal="30dp"
                     android:textSize="14sp"
                     android:hint="Введите тему для заявки"
                     android:focusedByDefault="false"
                     android:backgroundTint="@color/gradient_start_color"
+                    android:textCursorDrawable="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/black"
                     />
 
                 <View
@@ -87,12 +89,14 @@
                     android:id="@+id/activity_new_request_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="14sp"
                     android:layout_marginHorizontal="30dp"
                     android:hint="Введите описание"
                     android:focusedByDefault="false"
                     android:backgroundTint="@color/gradient_start_color"
+                    android:textCursorDrawable="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColor="@color/black"
                     />
 
                 <View

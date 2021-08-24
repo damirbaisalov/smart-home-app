@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.my_requests.view.RequestAdapter
 import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
@@ -123,24 +124,33 @@ class MyRequestsActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 searchView.clearFocus()
+
                 val queryText = p0?.lowercase()
+
 
                 myRequestAdapter.filter(queryText!!)
 
+
                 return false
+
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
 
                 val queryText = p0?.lowercase()
 
-                val newRequestList : MutableList<MyRequestApiData> = mutableListOf()
+//                cafeAdapter?.filter(queryText!!)
+//
+//                if (queryText?.isEmpty()!!)
+//                    cafeAdapter?.setList(searchingCafeList)
+
+                val newMyRequestList : MutableList<MyRequestApiData> = mutableListOf()
                 for (q in searchingRequestList) {
-                    if (q.heading?.contains(queryText!!)!!) {
-                        newRequestList.add(q)
+                    if (q.heading?.lowercase()?.contains(queryText!!)!!) {
+                        newMyRequestList.add(q)
                     }
                 }
-                myRequestAdapter.setList(newRequestList)
+                myRequestAdapter.setList(newMyRequestList)
 
                 return false
             }
