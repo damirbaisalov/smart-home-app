@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Patterns
 import android.widget.*
 import com.basgeekball.awesomevalidation.AwesomeValidation
@@ -72,10 +73,10 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
 
                 loadingDialog.startLoadingDialog()
 
-                val handler = Handler()
+                val handler = Handler(Looper.getMainLooper())
                 handler.postDelayed(Runnable {
                     loadingDialog.dialogDismiss()
-                }, 5000)
+                }, 3000)
 
                 val list = userFIOEditText.text.toString().split(" ")
                 when(list.size) {

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
@@ -30,6 +31,7 @@ class KskListActivity : AppCompatActivity() {
     private var clicked = false
     private var count = 0
     private val kskListAdapter = KskListAdapter(getKskItemClickListener())
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private lateinit var toolbarTitleTextView: TextView
     private var searchingKskList: List<KskApiData> = listOf()
@@ -52,6 +54,11 @@ class KskListActivity : AppCompatActivity() {
 
         backButton.setOnClickListener {
             onBackPressed()
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            kskListAdapter.clearAll()
+            loadApiData()
         }
 
         loadApiData()
@@ -95,7 +102,7 @@ class KskListActivity : AppCompatActivity() {
         val magId = searchView.context.resources.getIdentifier("android:id/search_src_text", null, null)
         val magTextView = searchView.findViewById<TextView>(magId)
         magTextView.setTextColor(Color.WHITE)
-
+        swipeRefreshLayout = findViewById(R.id.activity_ksk_list_swipe_refresh)
     }
 
     private fun loadApiData() {
@@ -106,6 +113,7 @@ class KskListActivity : AppCompatActivity() {
             ) {
                 progressBar.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
+                swipeRefreshLayout.isRefreshing = false
                 if (response.isSuccessful) {
 
                     val kskApiDataResponseList: MutableList<KskApiData> = mutableListOf()
@@ -118,6 +126,7 @@ class KskListActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<KskApiData>>, t: Throwable) {
+                swipeRefreshLayout.isRefreshing = false
                 progressBar.visibility = View.GONE
                 Toast.makeText(this@KskListActivity, t.message, Toast.LENGTH_LONG).show()
             }

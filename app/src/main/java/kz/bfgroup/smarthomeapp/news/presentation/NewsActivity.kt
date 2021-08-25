@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
@@ -24,10 +25,7 @@ class NewsActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var backButton: ImageButton
     private lateinit var progressBar: ProgressBar
-//    private lateinit var scrollDownButton: ImageButton
-//    private lateinit var scrollUpButton: ImageButton
-//    private var clicked = false
-//    private var count = 0
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private val newsAdapter = NewsAdapter(getNewsClickListener())
 
     private lateinit var toolbarTitleTextView: TextView
@@ -53,6 +51,11 @@ class NewsActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        swipeRefreshLayout.setOnRefreshListener {
+            newsAdapter.clearAll()
+            loadApiData()
+        }
+
         loadApiData()
         queryInSearchView()
     }
@@ -68,11 +71,10 @@ class NewsActivity : AppCompatActivity() {
         backButton = findViewById(R.id.activity_news_back_button)
         progressBar = findViewById(R.id.activity_news_list_progress_bar)
         recyclerView.visibility = View.INVISIBLE
-//        scrollDownButton = findViewById(R.id.scroll_down_recyclerview)
-//        scrollUpButton = findViewById(R.id.scroll_up_recyclerview)
 
         toolbarTitleTextView = findViewById(R.id.activity_news_list_toolbar_text_view)
         searchView = findViewById(R.id.activity_news_list_toolbar_search_view)
+        swipeRefreshLayout = findViewById(R.id.activity_news_swipe_refresh)
     }
 
     private fun loadApiData() {
@@ -83,17 +85,21 @@ class NewsActivity : AppCompatActivity() {
             ) {
                 progressBar.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
+                swipeRefreshLayout.isRefreshing = false
+
                 if (response.isSuccessful) {
 
                     val newsApiDataResponseList: MutableList<NewsApiData> = mutableListOf()
                     val list = response.body()!!
                     newsApiDataResponseList.addAll(list)
+                    searchingNewsList = list
                     newsAdapter.setList(newsApiDataResponseList)
                 }
             }
 
             override fun onFailure(call: Call<List<NewsApiData>>, t: Throwable) {
                 progressBar.visibility = View.GONE
+                swipeRefreshLayout.isRefreshing = false
                 Toast.makeText(this@NewsActivity, t.message, Toast.LENGTH_LONG).show()
             }
 
@@ -118,11 +124,6 @@ class NewsActivity : AppCompatActivity() {
             override fun onQueryTextChange(p0: String?): Boolean {
 
                 val queryText = p0?.lowercase()
-
-//                cafeAdapter?.filter(queryText!!)
-//
-//                if (queryText?.isEmpty()!!)
-//                    cafeAdapter?.setList(searchingCafeList)
 
                 val newNewsList : MutableList<NewsApiData> = mutableListOf()
                 for (q in searchingNewsList) {

@@ -86,10 +86,7 @@ class KskDetailActivity : AppCompatActivity() {
                     val splitPhone = responseBody.phones?.split(",")
                     kskDirectorTelephone.text = splitPhone?.first() ?: "Нет данных"
                     kskDirectorPhone.text = ("р. тел. " + splitPhone?.last())
-//                    try {
-//                    } catch (e: Exception) {
-//                        makeToast(e.toString())
-//                    }
+
                     val streetApiDataResponseList: MutableList<StreetApiData> = mutableListOf()
                     val list = response.body()!!.addrs
                     streetApiDataResponseList.addAll(list)

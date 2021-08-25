@@ -14,14 +14,23 @@
 
         <include layout="@layout/activity_news_toolbar"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/activity_news_recyclerview"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/activity_news_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingVertical="20dp"
-            android:clipToPadding="false"
-            tools:listitem="@layout/news_item"
-            />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_news_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="20dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="20dp"
+                tools:listitem="@layout/news_item"
+                />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </LinearLayout>
 

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
-import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 
 class RequestAdapter: RecyclerView.Adapter<RequestViewHolder>() {
 
@@ -15,10 +14,6 @@ class RequestAdapter: RecyclerView.Adapter<RequestViewHolder>() {
         val rootView = LayoutInflater.from(parent.context).inflate(R.layout.my_request_item, parent, false)
 
         return RequestViewHolder(rootView)
-//        return KskViewHolder(
-//            View.inflate(parent.context, R.layout.ksk_item_list, null),
-//            kskItemClickListener
-//        )
     }
 
     override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {

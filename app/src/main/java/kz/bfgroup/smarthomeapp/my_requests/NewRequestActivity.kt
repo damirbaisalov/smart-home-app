@@ -5,10 +5,13 @@ import android.content.DialogInterface
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kz.bfgroup.smarthomeapp.R
+import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
@@ -31,6 +34,8 @@ class NewRequestActivity : AppCompatActivity() {
 //    private val builder = AlertDialog.Builder(this)
     private lateinit var fields: Map<String, String>
     private lateinit var searchView: SearchView
+
+    private val loadingDialog: LoadingDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +64,14 @@ class NewRequestActivity : AppCompatActivity() {
                     "apply_ksk_id" to getSavedKskId(),
                     "apply_tenants_id" to getSavedUserId()
                 )
+
+                loadingDialog.startLoadingDialog()
+
+                val handler = Handler(Looper.getMainLooper())
+                handler.postDelayed(Runnable {
+                    loadingDialog.dialogDismiss()
+                }, 2000)
+
                 sendRequest()
             }
         }

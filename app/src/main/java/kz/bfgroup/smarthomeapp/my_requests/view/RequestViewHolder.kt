@@ -22,13 +22,34 @@ class RequestViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         myRequestAddress.text = myRequestApiData.address
         myRequestHeadingTextView.text = myRequestApiData.heading
         myRequestTextTextView.text = myRequestApiData.text
-        if (myRequestApiData.status=="4"){
-            myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_done)
-            myRequestStatusTextView.text = "новая заявка"
-        } else {
-            myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_cancel)
-            myRequestStatusTextView.text = "отклонена"
+//
+        when (myRequestApiData.status) {
+            "0" -> {
+                myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_done)
+                myRequestStatusTextView.text = "Выполнено"
+            }
+            "1" -> {
+                myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_outdated)
+                myRequestStatusTextView.text = "Просрочено"
+            }
+            "2" -> {
+                myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_new_not_in_process)
+                myRequestStatusTextView.text = "Новое/необработано"
+            }
+            "3" -> {
+                myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_in_process)
+                myRequestStatusTextView.text = "Принято/в работе"
+            }
+            "4" -> {
+                myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_new_request)
+                myRequestStatusTextView.text = "Новая заявка"
+            }
+            "5" -> {
+                myRequestStatusTextView.setBackgroundResource(R.drawable.bg_my_request_status_cancel)
+                myRequestStatusTextView.text = "Отклонена"
+            }
         }
+
         var convertDate = myRequestApiData.data_time?.substring(0,10)
         convertDate = convertDate?.replace("-",".")
         myRequestDateTextView.text = convertDate.toString()

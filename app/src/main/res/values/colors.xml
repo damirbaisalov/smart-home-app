@@ -18,7 +18,14 @@
     <color name="my_requests_text_color">#57A7B2</color>
     <color name="ksk_list_text_color">#8A8778</color>
     <color name="ksk_image_color">#2196F3</color>
+
     <color name="green_color">#05C25D</color>
     <color name="red_color">#FE1820</color>
+    <color name="outdated_color">#ffc107</color>
+    <color name="new_not_in_process_color">#f37521</color>
+    <color name="in_process_color">#8e21f3</color>
+    <color name="new_request_color">#2196f3</color>
+
+
 
 </resources>
