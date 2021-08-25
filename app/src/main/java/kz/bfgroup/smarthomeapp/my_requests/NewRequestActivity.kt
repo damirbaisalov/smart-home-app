@@ -66,12 +66,6 @@ class NewRequestActivity : AppCompatActivity() {
                 )
 
                 loadingDialog.startLoadingDialog()
-
-                val handler = Handler(Looper.getMainLooper())
-                handler.postDelayed(Runnable {
-                    loadingDialog.dialogDismiss()
-                }, 2000)
-
                 sendRequest()
             }
         }
@@ -94,8 +88,7 @@ class NewRequestActivity : AppCompatActivity() {
                 call: Call<ResponseBody>,
                 response: Response<ResponseBody>
             ) {
-//                progressBar.visibility = View.GONE
-//                recyclerView.visibility = View.VISIBLE
+                loadingDialog.dialogDismiss()
                 if (response.isSuccessful) {
                     if (response.body()?.string()=="Введите все поля!"){
                         Toast.makeText(this@NewRequestActivity, response.body()?.string(), Toast.LENGTH_LONG).show()
@@ -111,7 +104,7 @@ class NewRequestActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                progressBar.visibility = View.GONE
+                loadingDialog.dialogDismiss()
                 Toast.makeText(this@NewRequestActivity, t.message, Toast.LENGTH_LONG).show()
             }
 

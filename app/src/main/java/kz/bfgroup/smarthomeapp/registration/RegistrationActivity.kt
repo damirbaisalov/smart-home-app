@@ -1,11 +1,8 @@
 package kz.bfgroup.smarthomeapp.registration
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Patterns
 import android.widget.*
 import com.basgeekball.awesomevalidation.AwesomeValidation
@@ -41,7 +38,6 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
     private lateinit var userEntranceEditText: EditText
     private lateinit var userTelephoneEditText: EditText
     private lateinit var userPasswordEditText: EditText
-//    private lateinit var tinyDB: TinyDB
 
     private val loadingDialog: LoadingDialog = LoadingDialog(this)
 
@@ -72,11 +68,6 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
                 && userAddressEditText.text.toString().isNotEmpty()) {
 
                 loadingDialog.startLoadingDialog()
-
-                val handler = Handler(Looper.getMainLooper())
-                handler.postDelayed(Runnable {
-                    loadingDialog.dialogDismiss()
-                }, 3000)
 
                 val list = userFIOEditText.text.toString().split(" ")
                 when(list.size) {
@@ -135,8 +126,6 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         userAddressEditText.isFocusable = false
 
         validation = AwesomeValidation(ValidationStyle.BASIC)
-//        tinyDB = TinyDB(applicationContext)
-
     }
 
     private fun pickDate() {
@@ -165,6 +154,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
     private fun sendSmsCode() {
         ApiRetrofit.getApiClient().sendSMSCode(formatTelephoneNumber(userTelephoneEditText.text.toString())).enqueue(object: Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                loadingDialog.dialogDismiss()
                 if (response.isSuccessful) {
                     if (response.body()!!.string() == "Ok") {
                         showToast(response.body()!!.string())
@@ -178,7 +168,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                okRequest = false
+                loadingDialog.dialogDismiss()
                 showToast(t.message)
             }
         })

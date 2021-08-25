@@ -109,10 +109,6 @@ class CodeDialogFragment: DialogFragment() {
             )
             showToast(fields.toString())
             sendUserData()
-
-            val intent = Intent(rootView.context, MenuActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
         }
 
         return rootView
@@ -135,13 +131,16 @@ class CodeDialogFragment: DialogFragment() {
                     if (response.body()!!.mess_status == "0") {
                         showToast(response.body()!!.mess)
                     } else {
-                        showToast(response.body()!!.mess)
                         saveUserDataNeeded(
                             response.body()!!.serial_number!!,
                             response.body()!!.id!!,
                             response.body()!!.home_id!!,
                             response.body()!!.ksk_id!!
                         )
+
+                        val intent = Intent(rootView.context, MenuActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
                     }
                 }
             }
