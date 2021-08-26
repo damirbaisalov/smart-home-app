@@ -148,7 +148,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             convertedMonth = "0$savedMonth"
         }
         savedYear = year
-        userBirthdayEditText.setText("$savedDay.$convertedMonth.$savedYear")
+        userBirthdayEditText.setText("$savedYear.$convertedMonth.$savedDay")
     }
 
     private fun sendSmsCode() {

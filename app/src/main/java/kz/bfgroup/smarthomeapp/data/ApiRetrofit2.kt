@@ -7,7 +7,7 @@ object ApiRetrofit2 {
 
     const val BASE_URL = "https://15000pvl.kz/smart_dom/api/"
 
-    val okHttpClient = UnsafeOkHttpClient.unsafeOkHttpClient
+    private val okHttpClient = UnsafeOkHttpClient.unsafeOkHttpClient
 
     fun getApiClient(): ApiClient {
         val apiRetrofit = Retrofit.Builder()

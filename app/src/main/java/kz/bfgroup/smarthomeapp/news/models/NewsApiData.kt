@@ -14,7 +14,5 @@ data class NewsApiData(
     @JsonProperty("img")
     val img: String?,
     @JsonProperty("data")
-    val data: String?,
-    @JsonProperty("viewed")
-    val viewed: String?
+    val data: String?
 )

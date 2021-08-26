@@ -37,6 +37,7 @@ class MyRequestsActivity : AppCompatActivity() {
     private lateinit var toolbarTitleTextView: TextView
     private var searchingRequestList: List<MyRequestApiData> = listOf()
     private lateinit var searchView: SearchView
+    private lateinit var emptyRequestListTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +90,7 @@ class MyRequestsActivity : AppCompatActivity() {
         swipeRefreshLayout = findViewById(R.id.activity_my_request_refresh)
         toolbarTitleTextView = findViewById(R.id.activity_my_request_toolbar_text_view)
         searchView = findViewById(R.id.activity_my_request_toolbar_search_view)
+        emptyRequestListTextView = findViewById(R.id.my_request_list_empty_text_view)
     }
 
     private fun loadApiData(fields: Map<String,String>) {
@@ -108,6 +110,13 @@ class MyRequestsActivity : AppCompatActivity() {
                     requestsApiDataResponseList.addAll(list)
                     searchingRequestList = list
                     myRequestAdapter.setList(requestsApiDataResponseList)
+                    if (list.isEmpty()) {
+                        emptyRequestListTextView.visibility = View.VISIBLE
+                        recyclerView.visibility = View.INVISIBLE
+                    } else {
+                        emptyRequestListTextView.visibility = View.INVISIBLE
+                        recyclerView.visibility = View.VISIBLE
+                    }
                 }
             }
 

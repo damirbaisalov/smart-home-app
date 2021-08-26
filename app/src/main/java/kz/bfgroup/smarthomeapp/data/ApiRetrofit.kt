@@ -7,7 +7,7 @@ object ApiRetrofit {
 
     const val BASE_URL2 = "http://f0497377.xsph.ru/ksk_tenants/api/"
 
-    val okHttpClient = UnsafeOkHttpClient.unsafeOkHttpClient
+    private val okHttpClient = UnsafeOkHttpClient.unsafeOkHttpClient
 
     fun getApiClient(): ApiClient {
         val apiRetrofit = Retrofit.Builder()

@@ -1,5 +1,6 @@
 package kz.bfgroup.smarthomeapp.news.presentation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskItemClickListener
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskListAdapter
@@ -16,6 +18,7 @@ import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsAdapter
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsClickListener
+import kz.bfgroup.smarthomeapp.news_detailed.NewsDetailedActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -142,7 +145,9 @@ class NewsActivity : AppCompatActivity() {
     private fun getNewsClickListener(): NewsClickListener {
         return object: NewsClickListener {
             override fun onNewsClick(id: String?) {
-                Toast.makeText(this@NewsActivity, id, Toast.LENGTH_LONG).show()
+                val intent = Intent(this@NewsActivity, NewsDetailedActivity::class.java)
+                intent.putExtra("one_news_id", id)
+                startActivity(intent)
             }
         }
     }

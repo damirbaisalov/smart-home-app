@@ -107,7 +107,6 @@ class CodeDialogFragment: DialogFragment() {
                 "password" to userPassword,
                 "code" to code4signs
             )
-            showToast(fields.toString())
             sendUserData()
         }
 
