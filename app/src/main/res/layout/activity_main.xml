@@ -15,10 +15,18 @@
         android:orientation="vertical">
 
 
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+        <com.sanojpunchihewa.glowbutton.GlowButton
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:buttonColor="@color/button_color"
+            app:glowColor="@color/white"
+            android:text="УМНЫЙ ДОМ"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:minLines="2"
             android:padding="30dp"
+            app:cornerRadius="200dp"
             android:src="@drawable/smart_home_logo"
             />
 
