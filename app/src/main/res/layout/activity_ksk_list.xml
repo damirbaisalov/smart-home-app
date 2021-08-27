@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
 
         <include layout="@layout/activity_ksk_list_toolbar"
@@ -18,17 +17,16 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/activity_ksk_list_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:visibility="invisible"
                 android:id="@+id/activity_ksk_list_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingTop="5dp"
                 android:clipToPadding="false"
-                android:layout_marginBottom="80dp"
                 tools:listitem="@layout/ksk_item_list"
                 />
 
