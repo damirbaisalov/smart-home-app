@@ -13,5 +13,20 @@
         android:textStyle="bold"
         android:layout_marginStart="25dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <ImageButton
+            android:id="@+id/activity_menu_toolbar_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_log_out"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/bg_ripple_effect"/>
+
+    </LinearLayout>
+
 
 </androidx.appcompat.widget.Toolbar>

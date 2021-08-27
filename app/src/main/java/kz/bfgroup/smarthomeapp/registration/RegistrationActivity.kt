@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.*
 import com.basgeekball.awesomevalidation.AwesomeValidation
 import com.basgeekball.awesomevalidation.ValidationStyle
@@ -28,6 +29,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
     var savedYear = 0
     private lateinit var registerButton: Button
     private lateinit var validation: AwesomeValidation
+    private lateinit var logOutImageButton: ImageButton
 
     private lateinit var userFIOEditText: EditText
     private lateinit var userIINEditText: EditText
@@ -124,6 +126,8 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         registerButton = findViewById(R.id.submit_user_data_button)
         userBirthdayEditText.isFocusable = false
         userAddressEditText.isFocusable = false
+        logOutImageButton = findViewById(R.id.activity_menu_toolbar_logout)
+        logOutImageButton.visibility = View.INVISIBLE
 
         validation = AwesomeValidation(ValidationStyle.BASIC)
     }

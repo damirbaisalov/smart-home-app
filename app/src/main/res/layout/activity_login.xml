@@ -18,7 +18,6 @@
         android:layout_gravity="center"
         >
 
-
         <br.com.sapereaude.maskedEditText.MaskedEditText
             android:id="@+id/login_activity_user_telephone"
             android:layout_width="match_parent"

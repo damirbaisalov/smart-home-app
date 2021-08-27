@@ -24,13 +24,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var openRegistrationForm: LinearLayout
     private lateinit var loginFormLinearLayout: LinearLayout
     private lateinit var progressBar: ProgressBar
+    private lateinit var logOutImageButton: ImageButton
 
     private lateinit var fields: Map<String, String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         initViews()
 
         openRegistrationForm.setOnClickListener {
@@ -63,6 +63,8 @@ class LoginActivity : AppCompatActivity() {
         openRegistrationForm = findViewById(R.id.open_registration_form)
         loginFormLinearLayout = findViewById(R.id.login_form_linear_layout)
         progressBar = findViewById(R.id.login_form_progress_bar)
+        logOutImageButton = findViewById(R.id.activity_menu_toolbar_logout)
+        logOutImageButton.visibility = View.INVISIBLE
     }
 
     private fun sendUserData(fields: Map<String, String>) {
