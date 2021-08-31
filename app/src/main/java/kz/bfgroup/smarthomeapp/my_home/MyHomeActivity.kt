@@ -140,7 +140,7 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
                 if (response.isSuccessful) {
 
                     if (response.body() == null) {
-                        Toast.makeText(this@MyHomeActivity, "NET DOMA", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MyHomeActivity, "null", Toast.LENGTH_SHORT).show()
                     } else {
                         val responseBody = response.body()!!
                         myHomeYearConst.text = (responseBody.year_construction + " год")
