@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ProgressBar
+        android:id="@+id/nomer_list_dialog_fragment_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        />
+
+    <LinearLayout
+        android:id="@+id/nomer_list_dialog_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="30dp"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/nomer_list_dialog_fragment_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:queryHint="Поиск"
+            android:focusedByDefault="false"
+            android:layout_gravity="top"
+            app:searchIcon="@drawable/ic_search"
+            app:closeIcon="@drawable/ic_close"
+            android:background="@drawable/bg_search_view"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nomer_list_dialog_fragment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:layout_marginTop="8dp"
+            tools:itemCount="10"
+            tools:listitem="@layout/nomer_item"/>
+
+    </LinearLayout>
+
+</FrameLayout>

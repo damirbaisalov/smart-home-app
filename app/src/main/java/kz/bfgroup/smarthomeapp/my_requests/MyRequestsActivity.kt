@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -91,6 +92,10 @@ class MyRequestsActivity : AppCompatActivity() {
         toolbarTitleTextView = findViewById(R.id.activity_my_request_toolbar_text_view)
         searchView = findViewById(R.id.activity_my_request_toolbar_search_view)
         emptyRequestListTextView = findViewById(R.id.my_request_list_empty_text_view)
+
+        val magId = searchView.context.resources.getIdentifier("android:id/search_src_text", null, null)
+        val magTextView = searchView.findViewById<TextView>(magId)
+        magTextView.setTextColor(Color.WHITE)
     }
 
     private fun loadApiData(fields: Map<String,String>) {

@@ -8,7 +8,9 @@ import kz.bfgroup.smarthomeapp.my_ksk.models.CandidatesApiData
 import kz.bfgroup.smarthomeapp.my_ksk.models.MyKskApiData
 import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
+import kz.bfgroup.smarthomeapp.registration.models.NomerNameApiData
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
+import kz.bfgroup.smarthomeapp.registration.models.StreetNameApiData
 import kz.bfgroup.smarthomeapp.registration.models.UserApiData
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -82,4 +84,11 @@ interface ApiClient {
     @POST("post.php")
     fun getKskById(@Field("ksk_one_info_id") kskId: String) : Call<KskDetailedApiData>
 
+    @FormUrlEncoded
+    @POST("post.php")
+    fun getUniqueStreetList(@Field("all_unicue_streets") street: String) : Call<List<StreetApiData>>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun getHomeListByStreet(@Field("get_homes_where_street") street: String) : Call<List<NomerNameApiData>>
 }

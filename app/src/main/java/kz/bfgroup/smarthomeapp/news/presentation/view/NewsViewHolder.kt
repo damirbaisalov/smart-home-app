@@ -17,6 +17,7 @@ class NewsViewHolder(
     private val newsClickItemLayout : LinearLayout = itemView.findViewById(R.id.news_click_item)
     private val newsImage: ImageView = itemView.findViewById(R.id.news_image)
     private val newsTitle: TextView = itemView.findViewById(R.id.news_title)
+    private val newsDescription: TextView = itemView.findViewById(R.id.news_description)
 
     fun onBind(newsApiData: NewsApiData) {
 
@@ -27,6 +28,7 @@ class NewsViewHolder(
             .into(newsImage)
 
         newsTitle.text = newsApiData.title
+        newsDescription.text = newsApiData.description
 
         newsClickItemLayout.setOnClickListener {
             onNewsClickListener.onNewsClick(newsApiData.id)

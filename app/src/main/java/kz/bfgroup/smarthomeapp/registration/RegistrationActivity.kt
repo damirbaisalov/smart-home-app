@@ -1,5 +1,6 @@
 package kz.bfgroup.smarthomeapp.registration
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,7 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, StreetListDialogFragment.OnInputNewListener{
+class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, NomerListDialogFragment.OnInputNewListener{
 
     private val bundle = Bundle()
     var day = 0
@@ -139,7 +140,7 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             month = cal.get(Calendar.MONTH)
             year = cal.get(Calendar.YEAR)
 
-            DatePickerDialog(this, this,year,month,day).show()
+            DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,this,year,month,day).show()
         }
     }
 

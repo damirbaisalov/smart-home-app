@@ -35,12 +35,26 @@
             android:id="@+id/news_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="В Павлодаре до сих пор более 400 многоэтажек без горячей воды"
+            android:text="В Павлодаре"
             android:textSize="18sp"
             android:lineSpacingExtra="5dp"
             android:textStyle=""
             android:textColor="@color/black"
             />
+
+        <TextView
+            android:id="@+id/news_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:minLines="1"
+            android:maxLines="2"
+            android:text="В Павлодаре"
+            android:ellipsize="end"
+            />
+
+
 
         <TextView
             android:layout_width="wrap_content"

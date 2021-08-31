@@ -46,9 +46,11 @@ class KskListActivity : AppCompatActivity() {
 
         searchView.setOnSearchClickListener {
             toolbarTitleTextView.visibility = View.GONE
+//            searchView.setBackgroundResource(R.drawable.bg_search_view_on)
         }
         searchView.setOnCloseListener {
             toolbarTitleTextView.visibility = View.VISIBLE
+//            searchView.setBackgroundResource(R.drawable.bg_search_view_off)
             false
         }
 

@@ -1,6 +1,5 @@
 package kz.bfgroup.smarthomeapp.registration
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -16,11 +15,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
-import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
+import kz.bfgroup.smarthomeapp.registration.models.NomerNameApiData
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
-import kz.bfgroup.smarthomeapp.registration.models.StreetNameApiData
+import kz.bfgroup.smarthomeapp.registration.view.NomerAdapter
+import kz.bfgroup.smarthomeapp.registration.view.NomerClickListener
 import kz.bfgroup.smarthomeapp.registration.view.StreetAdapter
 import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
 import retrofit2.Call
@@ -28,15 +28,23 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.ClassCastException
 
-class StreetListDialogFragment: DialogFragment() {
+class NomerListDialogFragment: DialogFragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
-    private var streetAdapter = StreetAdapter(getStreetClickListener())
+    private var nomerAdapter = NomerAdapter(getNomerClickListener())
     private lateinit var searchView: SearchView
-    private var searchingStreetList: List<StreetApiData> = listOf()
+    private var searchingStreetList: List<NomerNameApiData> = listOf()
     private lateinit var progressBar: ProgressBar
-    private lateinit var streetListLayout: LinearLayout
+    private lateinit var selectedStreet: String
+
+    private lateinit var nomerListLayout: LinearLayout
+
+    interface OnInputNewListener {
+        fun inputAddress(street : String?, number: String?)
+    }
+
+    private lateinit var onInputNewListener: OnInputNewListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +53,8 @@ class StreetListDialogFragment: DialogFragment() {
     ): View? {
 
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        rootView = inflater.inflate(R.layout.street_list_dialog_fragment,container,false)
+        rootView = inflater.inflate(R.layout.nomer_list_dialog_fragment,container,false)
+        selectedStreet = arguments?.getString("selected_street").toString()
 
         bindViews()
 
@@ -57,43 +66,43 @@ class StreetListDialogFragment: DialogFragment() {
     }
 
     private fun bindViews() {
-        streetListLayout = rootView.findViewById(R.id.street_list_dialog_fragment_layout)
-        streetListLayout.visibility = View.GONE
+        nomerListLayout = rootView.findViewById(R.id.nomer_list_dialog_fragment_layout)
+        nomerListLayout.visibility = View.INVISIBLE
 
-        recyclerView = rootView.findViewById(R.id.street_list_dialog_fragment_recyclerview)
+        recyclerView = rootView.findViewById(R.id.nomer_list_dialog_fragment_recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(
             rootView.context,
             LinearLayoutManager.VERTICAL,
             false
         )
-        recyclerView.adapter = streetAdapter
-        searchView = rootView.findViewById(R.id.street_list_dialog_fragment_search_view)
-        progressBar = rootView.findViewById(R.id.street_list_dialog_fragment_progressbar)
+        recyclerView.adapter = nomerAdapter
+        searchView = rootView.findViewById(R.id.nomer_list_dialog_fragment_search_view)
+        progressBar = rootView.findViewById(R.id.nomer_list_dialog_fragment_progressbar)
         progressBar.visibility = View.VISIBLE
     }
 
     private fun loadApiData() {
-        ApiRetrofit.getApiClient().getUniqueStreetList("1").enqueue(object:
-            Callback<List<StreetApiData>> {
+        ApiRetrofit.getApiClient().getHomeListByStreet(selectedStreet).enqueue(object:
+            Callback<List<NomerNameApiData>> {
             override fun onResponse(
-                call: Call<List<StreetApiData>>,
-                response: Response<List<StreetApiData>>
+                call: Call<List<NomerNameApiData>>,
+                response: Response<List<NomerNameApiData>>
             ) {
                 progressBar.visibility = View.GONE
-                streetListLayout.visibility = View.VISIBLE
+                nomerListLayout.visibility = View.VISIBLE
                 if (response.isSuccessful) {
-                    val streetApiDataResponseList: MutableList<StreetApiData> = mutableListOf()
+                    val streetApiDataResponseList: MutableList<NomerNameApiData> = mutableListOf()
                     val list = response.body()!!
                     streetApiDataResponseList.addAll(list)
                     searchingStreetList = list
-                    streetAdapter.setList(streetApiDataResponseList)
-                    Toast.makeText(rootView.context, "Выберите адрес", Toast.LENGTH_LONG).show()
+                    nomerAdapter.setList(streetApiDataResponseList)
+                    Toast.makeText(rootView.context, "Выберите номер дома", Toast.LENGTH_LONG).show()
                 }
             }
 
-            override fun onFailure(call: Call<List<StreetApiData>>, t: Throwable) {
+            override fun onFailure(call: Call<List<NomerNameApiData>>, t: Throwable) {
                 progressBar.visibility = View.GONE
-                streetListLayout.visibility = View.VISIBLE
+                nomerListLayout.visibility = View.VISIBLE
                 Toast.makeText(rootView.context, t.message, Toast.LENGTH_LONG).show()
             }
 
@@ -106,7 +115,7 @@ class StreetListDialogFragment: DialogFragment() {
                 searchView.clearFocus()
                 val queryText = p0?.lowercase()
 
-                streetAdapter.filter(queryText!!)
+                nomerAdapter.filter(queryText!!)
 
                 return false
             }
@@ -115,30 +124,35 @@ class StreetListDialogFragment: DialogFragment() {
 
                 val queryText = p0?.lowercase()
 
-                val newStreetList : MutableList<StreetApiData> = mutableListOf()
+                val newStreetList : MutableList<NomerNameApiData> = mutableListOf()
                 for (q in searchingStreetList) {
-                    val streetWithNomer = q.street?.lowercase()
-                    if (streetWithNomer?.contains(queryText!!)!!) {
+                    val nomerName= q.nomer?.lowercase()
+                    if (nomerName?.contains(queryText!!)!!) {
                         newStreetList.add(q)
                     }
                 }
-                streetAdapter.setList(newStreetList)
+                nomerAdapter.setList(newStreetList)
 
                 return false
             }
         })
     }
 
-    private fun getStreetClickListener(): StreetClickListener {
-        return object: StreetClickListener {
-            override fun onClick(street: String?) {
-                val bundle = Bundle()
-                bundle.putString("selected_street", street)
-                val nomerListDialogFragment = NomerListDialogFragment()
-                nomerListDialogFragment.arguments = bundle
-                nomerListDialogFragment.show(parentFragmentManager, "nomerListDialogFragment")
+    private fun getNomerClickListener(): NomerClickListener {
+        return object: NomerClickListener {
+            override fun onClick(nomer: String?) {
+                onInputNewListener.inputAddress(selectedStreet, nomer)
                 dismiss()
             }
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            onInputNewListener = activity as OnInputNewListener
+        } catch (e: ClassCastException){
+            Log.d("TAG", "onAttach: ClassException: " + e.message)
         }
     }
 }

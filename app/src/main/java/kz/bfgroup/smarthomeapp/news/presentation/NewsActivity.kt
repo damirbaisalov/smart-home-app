@@ -1,6 +1,7 @@
 package kz.bfgroup.smarthomeapp.news.presentation
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -78,6 +79,10 @@ class NewsActivity : AppCompatActivity() {
         toolbarTitleTextView = findViewById(R.id.activity_news_list_toolbar_text_view)
         searchView = findViewById(R.id.activity_news_list_toolbar_search_view)
         swipeRefreshLayout = findViewById(R.id.activity_news_swipe_refresh)
+
+        val magId = searchView.context.resources.getIdentifier("android:id/search_src_text", null, null)
+        val magTextView = searchView.findViewById<TextView>(magId)
+        magTextView.setTextColor(Color.WHITE)
     }
 
     private fun loadApiData() {

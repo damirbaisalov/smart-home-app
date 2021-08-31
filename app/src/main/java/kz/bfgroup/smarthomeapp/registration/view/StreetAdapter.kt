@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
+import kz.bfgroup.smarthomeapp.registration.models.StreetNameApiData
 
 class StreetAdapter(
     private val streetClickListener: StreetClickListener
@@ -42,8 +43,8 @@ class StreetAdapter(
     fun filter(name: String) {
         val temp : MutableList<StreetApiData> = mutableListOf()
         for (d in dataList) {
-            val streetPlusNomer = (d.street?.lowercase() + ", " + d.nomer?.lowercase()).lowercase()
-            if (streetPlusNomer.contains(name)) {
+            val street= d.street?.lowercase()
+            if (street?.contains(name)!!) {
                 temp.add(d)
             }
         }
