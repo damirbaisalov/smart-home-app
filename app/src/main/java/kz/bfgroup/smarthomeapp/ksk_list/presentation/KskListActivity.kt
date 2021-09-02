@@ -177,9 +177,10 @@ class KskListActivity : AppCompatActivity() {
     private fun getKskItemClickListener(): KskItemClickListener {
         return object: KskItemClickListener {
             override fun onKskClick(id: String?) {
-                val intent = Intent(this@KskListActivity, KskDetailActivity::class.java)
-                intent.putExtra("ksk_info_id", id)
-                startActivity(intent)
+                val intentDetailed = Intent(this@KskListActivity, KskDetailActivity::class.java)
+                intentDetailed.putExtra("ksk_info_id", id)
+                intentDetailed.putExtra("save_button_invisible", intent.getBooleanExtra("clicked_from_open_ksk_list", false))
+                startActivity(intentDetailed)
             }
         }
     }

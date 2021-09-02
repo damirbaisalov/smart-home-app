@@ -23,6 +23,7 @@
             android:id="@+id/activity_ksk_detail_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="20dp"
             android:orientation="vertical">
 
             <include layout="@layout/activity_ksk_detail_toolbar"/>
@@ -178,6 +179,16 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/activity_ksk_detail_save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Сохранить КСК"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="50dp"
+                android:background="@drawable/bg_activity_ksk_detail_save_button"
+                />
 
         </LinearLayout>
 
