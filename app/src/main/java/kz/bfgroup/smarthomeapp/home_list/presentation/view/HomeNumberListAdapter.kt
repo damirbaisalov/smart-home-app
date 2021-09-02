@@ -1,28 +1,27 @@
-package kz.bfgroup.smarthomeapp.registration.view
+package kz.bfgroup.smarthomeapp.home_list.presentation.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
-import kz.bfgroup.smarthomeapp.registration.models.NomerNameApiData
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 
-class NomerAdapter(
-    private val nomerClickListener: NomerClickListener
-): RecyclerView.Adapter<NomerViewHolder>() {
+class HomeNumberListAdapter(
+    private val homeNumberClickListener: HomeNumberClickListener
+): RecyclerView.Adapter<HomeNumberListViewHolder>() {
 
     private var dataList: MutableList<StreetApiData> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NomerViewHolder {
-        val rootView = LayoutInflater.from(parent.context).inflate(R.layout.nomer_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeNumberListViewHolder {
+        val rootView = LayoutInflater.from(parent.context).inflate(R.layout.home_number_item, parent, false)
 
-        return NomerViewHolder(
+        return HomeNumberListViewHolder(
             rootView,
-            nomerClickListener
+            homeNumberClickListener
         )
     }
 
-    override fun onBindViewHolder(holder: NomerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeNumberListViewHolder, position: Int) {
         holder.onBind(dataList[position])
     }
 

@@ -34,7 +34,7 @@ class NomerListDialogFragment: DialogFragment() {
     private lateinit var recyclerView: RecyclerView
     private var nomerAdapter = NomerAdapter(getNomerClickListener())
     private lateinit var searchView: SearchView
-    private var searchingStreetList: List<NomerNameApiData> = listOf()
+    private var searchingStreetList: List<StreetApiData> = listOf()
     private lateinit var progressBar: ProgressBar
     private lateinit var selectedStreet: String
 
@@ -83,15 +83,15 @@ class NomerListDialogFragment: DialogFragment() {
 
     private fun loadApiData() {
         ApiRetrofit.getApiClient().getHomeListByStreet(selectedStreet).enqueue(object:
-            Callback<List<NomerNameApiData>> {
+            Callback<List<StreetApiData>> {
             override fun onResponse(
-                call: Call<List<NomerNameApiData>>,
-                response: Response<List<NomerNameApiData>>
+                call: Call<List<StreetApiData>>,
+                response: Response<List<StreetApiData>>
             ) {
                 progressBar.visibility = View.GONE
                 nomerListLayout.visibility = View.VISIBLE
                 if (response.isSuccessful) {
-                    val streetApiDataResponseList: MutableList<NomerNameApiData> = mutableListOf()
+                    val streetApiDataResponseList: MutableList<StreetApiData> = mutableListOf()
                     val list = response.body()!!
                     streetApiDataResponseList.addAll(list)
                     searchingStreetList = list
@@ -100,7 +100,7 @@ class NomerListDialogFragment: DialogFragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<NomerNameApiData>>, t: Throwable) {
+            override fun onFailure(call: Call<List<StreetApiData>>, t: Throwable) {
                 progressBar.visibility = View.GONE
                 nomerListLayout.visibility = View.VISIBLE
                 Toast.makeText(rootView.context, t.message, Toast.LENGTH_LONG).show()
@@ -124,7 +124,7 @@ class NomerListDialogFragment: DialogFragment() {
 
                 val queryText = p0?.lowercase()
 
-                val newStreetList : MutableList<NomerNameApiData> = mutableListOf()
+                val newStreetList : MutableList<StreetApiData> = mutableListOf()
                 for (q in searchingStreetList) {
                     val nomerName= q.nomer?.lowercase()
                     if (nomerName?.contains(queryText!!)!!) {

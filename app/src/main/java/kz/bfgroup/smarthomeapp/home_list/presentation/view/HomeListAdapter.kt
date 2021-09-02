@@ -1,28 +1,28 @@
-package kz.bfgroup.smarthomeapp.registration.view
+package kz.bfgroup.smarthomeapp.home_list.presentation.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
-import kz.bfgroup.smarthomeapp.registration.models.NomerNameApiData
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
+import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
 
-class NomerAdapter(
-    private val nomerClickListener: NomerClickListener
-): RecyclerView.Adapter<NomerViewHolder>() {
+class HomeListAdapter(
+    private val streetClickListener: StreetClickListener
+): RecyclerView.Adapter<HomeListViewHolder>() {
 
     private var dataList: MutableList<StreetApiData> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NomerViewHolder {
-        val rootView = LayoutInflater.from(parent.context).inflate(R.layout.nomer_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListViewHolder {
+        val rootView = LayoutInflater.from(parent.context).inflate(R.layout.home_item, parent, false)
 
-        return NomerViewHolder(
+        return HomeListViewHolder(
             rootView,
-            nomerClickListener
+            streetClickListener
         )
     }
 
-    override fun onBindViewHolder(holder: NomerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         holder.onBind(dataList[position])
     }
 
@@ -43,8 +43,8 @@ class NomerAdapter(
     fun filter(name: String) {
         val temp : MutableList<StreetApiData> = mutableListOf()
         for (d in dataList) {
-            val nomerName = d.nomer?.lowercase()
-            if (nomerName?.contains(name)!!) {
+            val street= d.street?.lowercase()
+            if (street?.contains(name)!!) {
                 temp.add(d)
             }
         }

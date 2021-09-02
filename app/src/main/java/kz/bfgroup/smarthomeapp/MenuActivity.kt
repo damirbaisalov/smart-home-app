@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.home_list.presentation.HomeListActivity
 import kz.bfgroup.smarthomeapp.ksk_detailed.KskDetailActivity
 import kz.bfgroup.smarthomeapp.ksk_detailed.MY_APP_WITH_KSK_ID
 import kz.bfgroup.smarthomeapp.ksk_detailed.SELECTED_KSK_ID
 import kz.bfgroup.smarthomeapp.ksk_list.presentation.KskListActivity
 import kz.bfgroup.smarthomeapp.login.LoginActivity
 import kz.bfgroup.smarthomeapp.my_home.MyHomeActivity
+import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_ID
 import kz.bfgroup.smarthomeapp.my_ksk.MyKskActivity
 import kz.bfgroup.smarthomeapp.my_requests.MyRequestsActivity
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
@@ -26,6 +28,7 @@ import kz.bfgroup.smarthomeapp.news.presentation.view.NewsAdapter
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsClickListener
 import kz.bfgroup.smarthomeapp.news_detailed.NewsDetailedActivity
 import kz.bfgroup.smarthomeapp.registration.GENERATED_ACCESS_TOKEN
+import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
 import kz.bfgroup.smarthomeapp.registration.MY_APP
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,10 +78,13 @@ class MenuActivity : AppCompatActivity() {
 
         val openMyHomeActivity = findViewById<LinearLayout>(R.id.open_my_home_activity)
         openMyHomeActivity.setOnClickListener {
-            if (getSavedSerialNumber()=="default"){
-                val intent = Intent(this, LoginActivity::class.java)
+            if (getSavedSerialNumber()=="default" && getSavedHomeId()=="default"){
+                val intent = Intent(this, HomeListActivity::class.java)
                 startActivity(intent)
-            } else {
+            } else if (getSavedSerialNumber() == "default" && getSavedHomeId() != "default"){
+                val intent = Intent(this, MyHomeActivity::class.java)
+                startActivity(intent)
+            } else if (getSavedSerialNumber() != "default") {
                 val intent = Intent(this, MyHomeActivity::class.java)
                 startActivity(intent)
             }
@@ -102,9 +108,11 @@ class MenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        logOutImageButton = findViewById<ImageButton>(R.id.activity_menu_toolbar_logout)
+        logOutImageButton = findViewById(R.id.activity_menu_toolbar_logout)
         logOutImageButton.setOnClickListener {
             deleteSavedSerialNumber()
+            deleteSelectedHome()
+            deleteSelectedKsk()
             finish()
             startActivity(intent)
         }
@@ -181,6 +189,15 @@ class MenuActivity : AppCompatActivity() {
         return sharedPreferences.getString(SELECTED_KSK_ID, "default") ?: "default"
     }
 
+    private fun getSavedHomeId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(SELECTED_HOME_ID, "default") ?: "default"
+    }
+
     private fun getSavedSerialNumber(): String {
         val sharedPreferences: SharedPreferences = getSharedPreferences(
             MY_APP,
@@ -197,6 +214,26 @@ class MenuActivity : AppCompatActivity() {
         )
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.remove(GENERATED_ACCESS_TOKEN)
+        editor.apply()
+    }
+
+    private fun deleteSelectedHome() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_HOME_ID)
+        editor.apply()
+    }
+
+    private fun deleteSelectedKsk() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_KSK_ID)
         editor.apply()
     }
 }

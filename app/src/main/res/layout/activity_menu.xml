@@ -58,7 +58,7 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@drawable/my_home_logo_new"
+                            android:src="@drawable/logo_news_1"
                             android:layout_gravity="center"
                             />
 
@@ -88,7 +88,7 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@drawable/my_home_logo_new"
+                            android:src="@drawable/logo_my_ksk"
                             android:layout_gravity="center"
                             />
 
@@ -158,7 +158,7 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@drawable/my_home_logo_new"
+                            android:src="@drawable/logo_my_requests"
                             android:layout_gravity="center"
                             />
 
@@ -188,7 +188,7 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@drawable/my_home_logo_new"
+                            android:src="@drawable/logo_ksk_list"
                             android:layout_gravity="center"
                             />
 

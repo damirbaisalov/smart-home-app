@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_activity_home_list_linear_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ProgressBar
+        android:id="@+id/home_number_list_dialog_fragment_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        />
+
+    <LinearLayout
+        android:id="@+id/home_number_list_dialog_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/home_number_list_dialog_fragment_home_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ул. Абая"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:paddingVertical="10dp"
+            android:textColor="@color/black"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_number_dialog_fragment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            tools:itemCount="10"
+            tools:listitem="@layout/home_number_item"/>
+
+    </LinearLayout>
+
+</FrameLayout>

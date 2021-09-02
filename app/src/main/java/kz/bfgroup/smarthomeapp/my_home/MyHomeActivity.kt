@@ -19,6 +19,10 @@ import com.yandex.runtime.network.RemoteError
 import com.yandex.runtime.ui_view.ViewProvider
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.home_list.presentation.SuccessSavedHomeStateDialogFragment
+import kz.bfgroup.smarthomeapp.ksk_detailed.MY_APP_WITH_KSK_ID
+import kz.bfgroup.smarthomeapp.ksk_detailed.SELECTED_KSK_ID
+import kz.bfgroup.smarthomeapp.ksk_detailed.SuccessSavedKskStateDialogFragment
 import kz.bfgroup.smarthomeapp.my_home.models.HomeApiData
 import kz.bfgroup.smarthomeapp.my_home.models.HomePassportApiData
 import kz.bfgroup.smarthomeapp.registration.*
@@ -26,6 +30,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+const val SELECTED_HOME_ID = "SELECTED_HOME_ID"
 class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListener {
 
     private lateinit var myHomeTitle: TextView
@@ -51,12 +56,34 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
     private lateinit var progressBar: ProgressBar
     private lateinit var myHomeLayout: LinearLayout
 
+    private lateinit var searchView: SearchView
+
+    private lateinit var homeIdTwoWay: String
+    private lateinit var saveHomeButton : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.initialize(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_home)
 
         initViews()
+
+        saveHomeButton.setOnClickListener {
+            if (!saveHomeButton.isSelected) {
+//                saveHomeButton.currentTextColor = R.color.white
+                saveHomeButton.isSelected = true
+                saveSelectedHomeId(homeIdTwoWay)
+
+                val dialogFragment = SuccessSavedHomeStateDialogFragment()
+                val fragmentManager = supportFragmentManager
+                val transaction = fragmentManager.beginTransaction()
+                dialogFragment.show(transaction, "dialog")
+
+            } else {
+                saveHomeButton.isSelected = false
+                deleteSelectedHome()
+            }
+        }
 
         mapView.map.move(
             CameraPosition(Point(52.27401,77.00438),11.0f,0.0f,0.0f),
@@ -71,7 +98,6 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
             progressBar.visibility = View.GONE
             myHomeLayout.visibility = View.VISIBLE
         }
-
     }
 
     private fun initViews() {
@@ -98,10 +124,30 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
         progressBar = findViewById(R.id.activity_my_home_progress_bar)
         myHomeLayout = findViewById(R.id.activity_my_home_layout)
         myHomeLayout.visibility = View.INVISIBLE
+        searchView = findViewById(R.id.activity_my_home_toolbar_search_view)
+        searchView.visibility = View.GONE
+
+        saveHomeButton = findViewById(R.id.activity_my_home_save_home_id)
+
+        homeIdTwoWay = if (getSavedSerialNumber()=="default") {
+            if (intent.getStringExtra("selected_street_with_number")==null) {
+                getSelectedHomeId()
+            } else {
+                intent.getStringExtra("selected_street_with_number").toString()
+            }
+        } else {
+            getSavedHomeId()
+        }
+
+        if (getSelectedHomeId()!="default") {
+            saveHomeButton.isSelected = true
+        } else {
+            saveHomeButton.isSelected = false
+        }
     }
 
     private fun loadApiData(): Boolean {
-        ApiRetrofit.getApiClient().getMyHomeAddress(getSavedHomeId()).enqueue(object: Callback<HomeApiData> {
+        ApiRetrofit.getApiClient().getMyHomeAddress(homeIdTwoWay).enqueue(object: Callback<HomeApiData> {
             override fun onResponse(
                 call: Call<HomeApiData>,
                 response: Response<HomeApiData>
@@ -131,7 +177,7 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
     }
 
     private fun loadApiData2(): Boolean {
-        ApiRetrofit.getApiClient().getMyHomePassport(getSavedHomeId()).enqueue(object: Callback<HomePassportApiData> {
+        ApiRetrofit.getApiClient().getMyHomePassport(homeIdTwoWay).enqueue(object: Callback<HomePassportApiData> {
             override fun onResponse(
                 call: Call<HomePassportApiData>,
                 response: Response<HomePassportApiData>
@@ -246,5 +292,41 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
         )
 
         return sharedPreferences.getString(GENERATED_HOME_ID, "default") ?: "default"
+    }
+
+    private fun saveSelectedHomeId(homeId: String) {
+        val sharedPref = this.getSharedPreferences(MY_APP_WITH_KSK_ID, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+
+        editor.putString(SELECTED_HOME_ID, homeId)
+        editor.apply()
+    }
+
+    private fun deleteSelectedHome() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_HOME_ID)
+        editor.apply()
+    }
+
+    private fun getSavedSerialNumber(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(GENERATED_ACCESS_TOKEN, "default") ?: "default"
+    }
+
+    private fun getSelectedHomeId(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(SELECTED_HOME_ID, "default") ?: "default"
     }
 }

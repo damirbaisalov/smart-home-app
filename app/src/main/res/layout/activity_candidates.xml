@@ -56,7 +56,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
+                        android:src="@drawable/square_logo"/>
 
                     <TextView
                         android:id="@+id/activity_candidates_my_ksk_title"
@@ -85,7 +85,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"/>
+                        android:src="@drawable/square_logo"/>
 
                     <TextView
                         android:id="@+id/my_ksk_employee_num"

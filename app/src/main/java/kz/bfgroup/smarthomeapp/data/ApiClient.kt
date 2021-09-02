@@ -90,5 +90,5 @@ interface ApiClient {
 
     @FormUrlEncoded
     @POST("post.php")
-    fun getHomeListByStreet(@Field("get_homes_where_street") street: String) : Call<List<NomerNameApiData>>
+    fun getHomeListByStreet(@Field("get_homes_where_street") street: String) : Call<List<StreetApiData>>
 }

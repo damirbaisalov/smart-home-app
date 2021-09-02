@@ -17,11 +17,15 @@
         android:id="@+id/my_request_list_empty_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ваш список заявок пуст"
+        android:text="Cписок заявок пуст"
+        android:elevation="10dp"
         android:layout_gravity="center"
-        android:textColor="@color/gradient_start_color"
-        android:textSize="28sp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="70dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:visibility="invisible"
+        android:background="@drawable/bg_activity_my_request_empty_list"
         />
 
     <LinearLayout

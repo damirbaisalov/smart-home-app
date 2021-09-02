@@ -44,7 +44,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
+                        android:src="@drawable/home_list_dom_logo"
                         />
 
                     <TextView
@@ -70,12 +70,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
 
                     <TextView
                         android:id="@+id/activity_my_home_status"
@@ -113,11 +107,6 @@
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -177,12 +166,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -215,11 +198,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -253,12 +231,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -291,11 +263,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -329,12 +296,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -367,11 +328,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -405,12 +361,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -442,12 +392,6 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -481,12 +425,6 @@
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -519,12 +457,6 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_pattern"
-                        />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -547,9 +479,19 @@
 
             </LinearLayout>
 
-
+            <Button
+                android:id="@+id/activity_my_home_save_home_id"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                android:paddingHorizontal="25dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Сохранить"
+                android:textAllCaps="false"
+                android:textColor="@color/button_color"
+                android:background="@drawable/bg_activity_home_id_save_button"/>
         </LinearLayout>
-
 
     </androidx.core.widget.NestedScrollView>
 
