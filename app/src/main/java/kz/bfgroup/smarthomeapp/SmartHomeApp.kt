@@ -6,7 +6,7 @@ import com.yandex.mapkit.MapKitFactory
 class SmartHomeApp: Application() {
 
     override fun onCreate() {
-        MapKitFactory.setApiKey("5082c38f-5a2f-4d28-8ecb-3371165769a0")
+        MapKitFactory.setApiKey("c262adf3-1680-4d27-a67d-3890f1a891eb")
         super.onCreate()
     }
 }

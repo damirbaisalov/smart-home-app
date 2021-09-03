@@ -143,7 +143,7 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 
         saveHomeButton = findViewById(R.id.activity_my_home_save_home_id)
 
-//        Toast.makeText(this,intent.getStringExtra("selected_street_with_number"),Toast.LENGTH_LONG).show()
+//
         if (intent.getStringExtra("selected_street_with_number")!=null) {
             if (intent.getStringExtra("selected_street_with_number")==getSelectedHomeId()) {
                 saveHomeButton.isSelected = true
@@ -227,7 +227,7 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
                 if (response.isSuccessful) {
 
                     if (response.body() == null) {
-                        Toast.makeText(this@MyHomeActivity, "null", Toast.LENGTH_SHORT).show()
+
                     } else {
                         val responseBody = response.body()!!
                         myHomeYearConst.text = (responseBody.year_construction + " год")
