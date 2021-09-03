@@ -34,7 +34,6 @@
                 android:scaleType="centerCrop"
                 android:layout_gravity="center"
                 android:paddingHorizontal="3dp"
-                android:src="@drawable/kb_pattern"
                 android:paddingVertical="4dp"
                 />
 

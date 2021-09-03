@@ -2,6 +2,7 @@ package kz.bfgroup.smarthomeapp.my_home
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -31,6 +32,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 const val SELECTED_HOME_ID = "SELECTED_HOME_ID"
+const val SELECTED_HOME_STREET = "SELECTED_HOME_STREET"
+const val SELECTED_HOME_NUMBER = "SELECTED_HOME_NUMBER"
 class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListener {
 
     private lateinit var myHomeTitle: TextView
@@ -60,6 +63,9 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 
     private lateinit var homeIdTwoWay: String
     private lateinit var saveHomeButton : Button
+    private lateinit var selectedHomeStreet : String
+    private lateinit var selectedHomeNumber : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MapKitFactory.initialize(this)
@@ -72,7 +78,11 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
             if (!saveHomeButton.isSelected) {
 //                saveHomeButton.currentTextColor = R.color.white
                 saveHomeButton.isSelected = true
+                saveHomeButton.text = "Сохранен"
+                saveHomeButton.setTextColor(Color.parseColor("#FFFFFFFF"))
                 saveSelectedHomeId(homeIdTwoWay)
+
+                saveHomeAddress(selectedHomeStreet, selectedHomeNumber)
 
                 val dialogFragment = SuccessSavedHomeStateDialogFragment()
                 val fragmentManager = supportFragmentManager
@@ -81,7 +91,11 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 
             } else {
                 saveHomeButton.isSelected = false
+                saveHomeButton.setTextColor(Color.parseColor("#0C90FF"))
+                saveHomeButton.text = "Сохранить"
                 deleteSelectedHome()
+                deleteSelectedHomeStreet()
+                deleteSelectedHomeNumber()
             }
         }
 
@@ -129,6 +143,19 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 
         saveHomeButton = findViewById(R.id.activity_my_home_save_home_id)
 
+//        Toast.makeText(this,intent.getStringExtra("selected_street_with_number"),Toast.LENGTH_LONG).show()
+        if (intent.getStringExtra("selected_street_with_number")!=null) {
+            if (intent.getStringExtra("selected_street_with_number")==getSelectedHomeId()) {
+                saveHomeButton.isSelected = true
+                saveHomeButton.text = "Сохранен"
+                saveHomeButton.setTextColor(Color.parseColor("#FFFFFFFF"))
+            } else {
+                saveHomeButton.isSelected = false
+                saveHomeButton.setTextColor(Color.parseColor("#0C90FF"))
+                saveHomeButton.text = "Сохранить"
+            }
+        }
+
         homeIdTwoWay = if (getSavedSerialNumber()=="default") {
             if (intent.getStringExtra("selected_street_with_number")==null) {
                 getSelectedHomeId()
@@ -139,10 +166,20 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
             getSavedHomeId()
         }
 
+        if (getSavedSerialNumber() != "default") {
+            saveHomeButton.visibility = View.GONE
+        } else {
+            saveHomeButton.visibility = View.VISIBLE
+        }
+
         if (getSelectedHomeId()!="default") {
             saveHomeButton.isSelected = true
+            saveHomeButton.text = "Сохранен"
+            saveHomeButton.setTextColor(Color.parseColor("#FFFFFFFF"))
         } else {
             saveHomeButton.isSelected = false
+            saveHomeButton.setTextColor(Color.parseColor("#0C90FF"))
+            saveHomeButton.text = "Сохранить"
         }
     }
 
@@ -156,6 +193,10 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 
                     val responseBody = response.body()!!
                     val addressGeoCode = responseBody.street + ", " + responseBody.nomer
+
+                    selectedHomeStreet = responseBody.street.toString()
+                    selectedHomeNumber = responseBody.nomer.toString()
+
 
                     homeAddressText = addressGeoCode
 
@@ -328,5 +369,34 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
         )
 
         return sharedPreferences.getString(SELECTED_HOME_ID, "default") ?: "default"
+    }
+
+    private fun saveHomeAddress(homeStreet: String, homeNumber: String) {
+        val sharedPref = this.getSharedPreferences(MY_APP_WITH_KSK_ID, Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+
+        editor.putString(SELECTED_HOME_STREET, homeStreet)
+        editor.putString(SELECTED_HOME_NUMBER, homeNumber)
+        editor.apply()
+    }
+
+    private fun deleteSelectedHomeStreet() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_HOME_STREET)
+        editor.apply()
+    }
+
+    private fun deleteSelectedHomeNumber() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_HOME_NUMBER)
+        editor.apply()
     }
 }

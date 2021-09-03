@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.DialogFragment
@@ -22,6 +23,7 @@ import kz.bfgroup.smarthomeapp.home_list.presentation.view.HomeNumberListAdapter
 import kz.bfgroup.smarthomeapp.ksk_detailed.MY_APP_WITH_KSK_ID
 import kz.bfgroup.smarthomeapp.ksk_detailed.SELECTED_KSK_ID
 import kz.bfgroup.smarthomeapp.my_home.MyHomeActivity
+import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_ID
 import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
 import kz.bfgroup.smarthomeapp.registration.MY_APP
 import kz.bfgroup.smarthomeapp.registration.models.NomerNameApiData
@@ -39,6 +41,7 @@ class HomeNumberListDialogFragment: DialogFragment() {
     private var homeNumberListAdapter = HomeNumberListAdapter(getHomeNumberClickListener())
     private lateinit var progressBar: ProgressBar
     private lateinit var selectedStreet: String
+    private lateinit var streetTitleTextView: TextView
     private lateinit var homeNumberLayout : LinearLayout
 
     override fun onCreateView(
@@ -71,6 +74,8 @@ class HomeNumberListDialogFragment: DialogFragment() {
         recyclerView.adapter = homeNumberListAdapter
         progressBar = rootView.findViewById(R.id.home_number_list_dialog_fragment_progressbar)
         progressBar.visibility = View.VISIBLE
+        streetTitleTextView = rootView.findViewById(R.id.home_number_list_dialog_fragment_home_name)
+        streetTitleTextView.text = ("ул. $selectedStreet")
     }
 
     private fun loadApiData() {
@@ -105,17 +110,17 @@ class HomeNumberListDialogFragment: DialogFragment() {
             override fun onClick(id: String?, nomer: String?) {
                 val intentMyHome = Intent(rootView.context, MyHomeActivity::class.java)
                 intentMyHome.putExtra("selected_street_with_number", id)
-//                saveHomeId(id!!)
+//                saveHomeIdFromList(id!!)
                 startActivity(intentMyHome)
             }
         }
     }
 
-    private fun saveHomeId(homeId: String) {
-        val sharedPref = rootView.context.getSharedPreferences(MY_APP, Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-
-        editor.putString(GENERATED_HOME_ID, homeId)
-        editor.apply()
-    }
+//    private fun saveHomeIdFromList(homeId: String) {
+//        val sharedPref = rootView.context.getSharedPreferences(MY_APP_WITH_KSK_ID, Context.MODE_PRIVATE)
+//        val editor: SharedPreferences.Editor = sharedPref.edit()
+//
+//        editor.putString(SELECTED_HOME_ID, homeId)
+//        editor.apply()
+//    }
 }

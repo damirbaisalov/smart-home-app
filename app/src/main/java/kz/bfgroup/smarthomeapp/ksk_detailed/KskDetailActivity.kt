@@ -2,6 +2,7 @@ package kz.bfgroup.smarthomeapp.ksk_detailed
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -54,7 +55,8 @@ class KskDetailActivity : AppCompatActivity() {
 
         saveKskButton.setOnClickListener {
             if (!saveKskButton.isSelected) {
-                saveKskButton.text = "Мой Кск"
+                saveKskButton.text = "КСК сохранен"
+                saveKskButton.setTextColor(Color.parseColor("#FFFFFFFF"))
                 saveKskButton.isSelected = true
                 saveSelectedKsk(kskIdFromKskList!!)
 
@@ -64,8 +66,9 @@ class KskDetailActivity : AppCompatActivity() {
                 dialogFragment.show(transaction, "dialog")
 
             } else {
-                saveKskButton.text = "Сохранить Кск"
+                saveKskButton.text = "Сохранить КСК"
                 saveKskButton.isSelected = false
+                saveKskButton.setTextColor(Color.parseColor("#0C90FF"))
                 deleteSelectedKsk()
             }
         }
@@ -100,10 +103,12 @@ class KskDetailActivity : AppCompatActivity() {
         }
 
         if (getSavedKskId() == kskIdFromKskList) {
-            saveKskButton.text = "Мой Кск"
             saveKskButton.isSelected = true
+            saveKskButton.text = "КСК сохранен"
+            saveKskButton.setTextColor(Color.parseColor("#FFFFFFFF"))
         } else {
             saveKskButton.text = "Сохранить Кск"
+            saveKskButton.setTextColor(Color.parseColor("#0C90FF"))
             saveKskButton.isSelected = false
         }
     }

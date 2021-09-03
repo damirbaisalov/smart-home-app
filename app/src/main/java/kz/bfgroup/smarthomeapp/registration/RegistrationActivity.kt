@@ -2,6 +2,8 @@ package kz.bfgroup.smarthomeapp.registration
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -13,6 +15,10 @@ import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
+import kz.bfgroup.smarthomeapp.ksk_detailed.MY_APP_WITH_KSK_ID
+import kz.bfgroup.smarthomeapp.ksk_detailed.SELECTED_KSK_ID
+import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_NUMBER
+import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_STREET
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -129,6 +135,12 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         userAddressEditText.isFocusable = false
         logOutImageButton = findViewById(R.id.activity_menu_toolbar_logout)
         logOutImageButton.visibility = View.INVISIBLE
+
+        if (getSavedHomeStreet()!="default" && getSavedHomeNumber()!="default") {
+            userAddressEditText.setText("${getSavedHomeStreet()}, ${getSavedHomeNumber()}")
+            bundle.putString("user_street", getSavedHomeStreet())
+            bundle.putString("user_street_nomer", getSavedHomeNumber())
+        }
 
         validation = AwesomeValidation(ValidationStyle.BASIC)
     }
@@ -255,6 +267,24 @@ class RegistrationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         telephoneNumber = telephoneNumber.replace("+","")
 
         return telephoneNumber
+    }
+
+    private fun getSavedHomeStreet(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(SELECTED_HOME_STREET, "default") ?: "default"
+    }
+
+    private fun getSavedHomeNumber(): String {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+
+        return sharedPreferences.getString(SELECTED_HOME_NUMBER, "default") ?: "default"
     }
 
     private fun showToast(text: String?) {

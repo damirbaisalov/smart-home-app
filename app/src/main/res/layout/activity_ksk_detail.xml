@@ -41,7 +41,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginVertical="10dp"
-                    android:src="@drawable/logo_pattern"
+                    android:src="@drawable/ksk_item_shield_logo"
                     />
 
                 <TextView
@@ -179,16 +179,29 @@
 
             </LinearLayout>
 
+<!--            <Button-->
+<!--                android:id="@+id/activity_ksk_detail_save_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Сохранить КСК"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginHorizontal="50dp"-->
+<!--                android:background="@drawable/bg_activity_ksk_detail_save_button"-->
+<!--                />-->
+
             <Button
                 android:id="@+id/activity_ksk_detail_save_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Сохранить КСК"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="50dp"
-                android:background="@drawable/bg_activity_ksk_detail_save_button"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="end"
+                android:paddingHorizontal="25dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Сохранить"
+                android:textAllCaps="false"
+                android:textColor="@color/button_color"
+                android:background="@drawable/bg_activity_home_id_save_button"/>
 
         </LinearLayout>
 

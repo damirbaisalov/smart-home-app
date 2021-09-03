@@ -20,6 +20,8 @@ import kz.bfgroup.smarthomeapp.ksk_list.presentation.KskListActivity
 import kz.bfgroup.smarthomeapp.login.LoginActivity
 import kz.bfgroup.smarthomeapp.my_home.MyHomeActivity
 import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_ID
+import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_NUMBER
+import kz.bfgroup.smarthomeapp.my_home.SELECTED_HOME_STREET
 import kz.bfgroup.smarthomeapp.my_ksk.MyKskActivity
 import kz.bfgroup.smarthomeapp.my_requests.MyRequestsActivity
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
@@ -27,9 +29,7 @@ import kz.bfgroup.smarthomeapp.news.presentation.NewsActivity
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsAdapter
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsClickListener
 import kz.bfgroup.smarthomeapp.news_detailed.NewsDetailedActivity
-import kz.bfgroup.smarthomeapp.registration.GENERATED_ACCESS_TOKEN
-import kz.bfgroup.smarthomeapp.registration.GENERATED_HOME_ID
-import kz.bfgroup.smarthomeapp.registration.MY_APP
+import kz.bfgroup.smarthomeapp.registration.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,10 +78,10 @@ class MenuActivity : AppCompatActivity() {
 
         val openMyHomeActivity = findViewById<LinearLayout>(R.id.open_my_home_activity)
         openMyHomeActivity.setOnClickListener {
-            if (getSavedSerialNumber()=="default" && getSavedHomeId()=="default"){
+            if (getSavedSerialNumber()=="default" && getSelectedHomeId()=="default"){
                 val intent = Intent(this, HomeListActivity::class.java)
                 startActivity(intent)
-            } else if (getSavedSerialNumber() == "default" && getSavedHomeId() != "default"){
+            } else if (getSavedSerialNumber() == "default" && getSelectedHomeId() != "default"){
                 val intent = Intent(this, MyHomeActivity::class.java)
                 startActivity(intent)
             } else if (getSavedSerialNumber() != "default") {
@@ -111,8 +111,13 @@ class MenuActivity : AppCompatActivity() {
         logOutImageButton = findViewById(R.id.activity_menu_toolbar_logout)
         logOutImageButton.setOnClickListener {
             deleteSavedSerialNumber()
+            deleteSavedHomeId()
+            deleteSavedKskId()
+            deleteSavedUserId()
             deleteSelectedHome()
             deleteSelectedKsk()
+            deleteSelectedHomeStreet()
+            deleteSelectedHomeNumber()
             finish()
             startActivity(intent)
         }
@@ -189,7 +194,7 @@ class MenuActivity : AppCompatActivity() {
         return sharedPreferences.getString(SELECTED_KSK_ID, "default") ?: "default"
     }
 
-    private fun getSavedHomeId(): String {
+    private fun getSelectedHomeId(): String {
         val sharedPreferences: SharedPreferences = getSharedPreferences(
             MY_APP_WITH_KSK_ID,
             Context.MODE_PRIVATE
@@ -217,6 +222,36 @@ class MenuActivity : AppCompatActivity() {
         editor.apply()
     }
 
+    private fun deleteSavedHomeId() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(GENERATED_HOME_ID)
+        editor.apply()
+    }
+
+    private fun deleteSavedKskId() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(GENERATED_KSK_ID)
+        editor.apply()
+    }
+
+    private fun deleteSavedUserId() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(GENERATED_USER_ID)
+        editor.apply()
+    }
+
     private fun deleteSelectedHome() {
         val sharedPreferences: SharedPreferences = getSharedPreferences(
             MY_APP_WITH_KSK_ID,
@@ -234,6 +269,26 @@ class MenuActivity : AppCompatActivity() {
         )
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.remove(SELECTED_KSK_ID)
+        editor.apply()
+    }
+
+    private fun deleteSelectedHomeStreet() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_HOME_STREET)
+        editor.apply()
+    }
+
+    private fun deleteSelectedHomeNumber() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences(
+            MY_APP_WITH_KSK_ID,
+            Context.MODE_PRIVATE
+        )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.remove(SELECTED_HOME_NUMBER)
         editor.apply()
     }
 }

@@ -58,7 +58,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:id="@+id/my_ksk_title"
@@ -87,7 +87,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:id="@+id/my_ksk_employee_num"
@@ -116,7 +116,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:id="@+id/my_ksk_contacts"
@@ -145,7 +145,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:id="@+id/my_ksk_predsedatel"
@@ -175,7 +175,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:id="@+id/my_ksk_home_count"
@@ -218,7 +218,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -254,7 +254,7 @@
                     <ImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/square_logo"/>
+                        android:src="@drawable/square_small"/>
 
                     <TextView
                         android:layout_width="wrap_content"

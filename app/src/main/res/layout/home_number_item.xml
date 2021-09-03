@@ -12,7 +12,7 @@
         android:layout_height="24dp"
         android:layout_marginVertical="10dp"
         android:layout_marginStart="30dp"
-        android:src="@drawable/nomer_doma_logo"
+        android:src="@drawable/home_number_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/home_number_item_horizontal_line"
         app:layout_constraintStart_toStartOf="parent"
