@@ -4,9 +4,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.module.AppGlideModule
 import kz.bfgroup.smarthomeapp.R
+import kz.bfgroup.smarthomeapp.data.GlideApp
+import kz.bfgroup.smarthomeapp.data.MyGlideModule
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 
 class NewsViewHolder(
@@ -21,7 +27,7 @@ class NewsViewHolder(
 
     fun onBind(newsApiData: NewsApiData) {
 
-        Glide
+        GlideApp
             .with(itemView.context)
             .load(newsApiData.img)
             .centerCrop()

@@ -2,21 +2,15 @@ package kz.bfgroup.smarthomeapp.registration
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 //import com.mukesh.tinydb.TinyDB
 import kz.bfgroup.smarthomeapp.R
-import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 import kz.bfgroup.smarthomeapp.registration.view.StreetAdapter
 import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class StreetListActivity : AppCompatActivity() {
 

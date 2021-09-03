@@ -19,8 +19,12 @@ import java.net.ResponseCache
 
 interface ApiClient {
 
-    @GET("ListKSK.php")
-    fun getKskList(): Call<List<KskApiData>>
+//    @GET("ListKSK.php")
+//    fun getKskList(): Call<List<KskApiData>>
+
+    @FormUrlEncoded
+    @POST("post.php")
+    fun getKskList(@Field("ksk_list") kskList: String): Call<List<KskApiData>>
 
     @GET("news.php")
     fun getNews() : Call<List<NewsApiData>>
@@ -77,8 +81,8 @@ interface ApiClient {
     @POST("post.php")
     fun registerUser(@FieldMap fields: Map<String, String>) : Call<UserApiData>
 
-    @GET("orderByName.php")
-    fun getHomeList(): Call<List<StreetApiData>>
+//    @GET("orderByName.php")
+//    fun getHomeList(): Call<List<StreetApiData>>
 
     @FormUrlEncoded
     @POST("post.php")

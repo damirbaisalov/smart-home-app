@@ -16,13 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
-import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
-import kz.bfgroup.smarthomeapp.registration.models.NomerNameApiData
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 import kz.bfgroup.smarthomeapp.registration.view.NomerAdapter
 import kz.bfgroup.smarthomeapp.registration.view.NomerClickListener
-import kz.bfgroup.smarthomeapp.registration.view.StreetAdapter
-import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

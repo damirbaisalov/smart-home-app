@@ -143,9 +143,18 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
 
         saveHomeButton = findViewById(R.id.activity_my_home_save_home_id)
 
-//
         if (intent.getStringExtra("selected_street_with_number")!=null) {
             if (intent.getStringExtra("selected_street_with_number")==getSelectedHomeId()) {
+                saveHomeButton.isSelected = true
+                saveHomeButton.text = "Сохранен"
+                saveHomeButton.setTextColor(Color.parseColor("#FFFFFFFF"))
+            } else {
+                saveHomeButton.isSelected = false
+                saveHomeButton.setTextColor(Color.parseColor("#0C90FF"))
+                saveHomeButton.text = "Сохранить"
+            }
+        } else {
+            if (getSelectedHomeId()!="default") {
                 saveHomeButton.isSelected = true
                 saveHomeButton.text = "Сохранен"
                 saveHomeButton.setTextColor(Color.parseColor("#FFFFFFFF"))
@@ -170,16 +179,6 @@ class MyHomeActivity : AppCompatActivity(), Session.SearchListener, CameraListen
             saveHomeButton.visibility = View.GONE
         } else {
             saveHomeButton.visibility = View.VISIBLE
-        }
-
-        if (getSelectedHomeId()!="default") {
-            saveHomeButton.isSelected = true
-            saveHomeButton.text = "Сохранен"
-            saveHomeButton.setTextColor(Color.parseColor("#FFFFFFFF"))
-        } else {
-            saveHomeButton.isSelected = false
-            saveHomeButton.setTextColor(Color.parseColor("#0C90FF"))
-            saveHomeButton.text = "Сохранить"
         }
     }
 

@@ -12,17 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
-import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.ksk_detailed.models.KskDetailedApiData
 import kz.bfgroup.smarthomeapp.ksk_detailed.view.KskAddressesAdapter
-import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
-import kz.bfgroup.smarthomeapp.my_requests.SuccessNewRequestDialogFragment
-import kz.bfgroup.smarthomeapp.registration.*
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 const val MY_APP_WITH_KSK_ID = "MY_APP_WITH_KSK_ID"
 const val SELECTED_KSK_ID = "MY_APP_SELECTED_KSK_ID"

@@ -11,11 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kz.bfgroup.smarthomeapp.R
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
-import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
-import kz.bfgroup.smarthomeapp.ksk_list.models.KskApiData
-import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskItemClickListener
-import kz.bfgroup.smarthomeapp.ksk_list.presentation.view.KskListAdapter
-import kz.bfgroup.smarthomeapp.my_requests.models.MyRequestApiData
 import kz.bfgroup.smarthomeapp.news.models.NewsApiData
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsAdapter
 import kz.bfgroup.smarthomeapp.news.presentation.view.NewsClickListener

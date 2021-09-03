@@ -1,9 +1,6 @@
 package kz.bfgroup.smarthomeapp.registration
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,17 +13,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kz.bfgroup.smarthomeapp.R
-import kz.bfgroup.smarthomeapp.common.LoadingDialog
 import kz.bfgroup.smarthomeapp.data.ApiRetrofit
-import kz.bfgroup.smarthomeapp.data.ApiRetrofit2
 import kz.bfgroup.smarthomeapp.registration.models.StreetApiData
-import kz.bfgroup.smarthomeapp.registration.models.StreetNameApiData
 import kz.bfgroup.smarthomeapp.registration.view.StreetAdapter
 import kz.bfgroup.smarthomeapp.registration.view.StreetClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.ClassCastException
 
 class StreetListDialogFragment: DialogFragment() {
 
